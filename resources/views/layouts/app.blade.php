@@ -30,9 +30,10 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main >
                 {{ $slot }}
             </main>
         </div>
     </body>
+    <script src="https://kit.fontawesome.com/59a47457f6.js" crossorigin="anonymous"></script>
 </html>

@@ -24,7 +24,10 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/pengumuman', [AdminController::class, 'pengumuman'])->name('pengumuman');
     Route::get('/dashboard/keuangan', [AdminController::class, 'keuangan'])->name('keuangan');
+    Route::get('/dashboard/gambar', [AdminController::class, 'gambar'])->name('gambar');
     Route::get('/dashboard/petugas/jumat', [AdminController::class, 'jumat'])->name('petugas.jumat');
+    Route::get('/dashboard/gambar/edit/{id}', [AdminController::class, 'editGambar'])->name('gambar.edit');
+    Route::post('/dashboard/gambar/edit/{id}', [AdminController::class, 'store'])->name('gambar.store');
 });
 
 require __DIR__.'/auth.php';

@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('petugas.jumat')" :active="request()->routeIs('petugas.jumat')">
                         {{ __('Petugas Jumat') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('gambar')" :active="request()->routeIs(['gambar','gambar.edit'])">
+                        {{ __('Latar Belakang') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -84,6 +87,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('petugas.jumat')" :active="request()->routeIs('petugas.jumat')">
                 {{ __('Petugas Jumat') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('gambar')" :active="request()->routeIs(['gambar','gambar.edit'])">
+                {{ __('Latar Belakang') }}
             </x-responsive-nav-link>
         </div>
 

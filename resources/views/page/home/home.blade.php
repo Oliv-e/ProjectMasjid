@@ -32,74 +32,18 @@
     </div>
 
     <div class="container">
-        <div class="row bg-success py-4">
-            {{-- <div class="col-4 p-2 text-center bg-danger">
-                <span class="fs-2">Jadwal Pengurus Jumat</span>
-                <div class="row g-2 fs-3">
-                    <div class="col-6">
-                        Muadzin
-                    </div>
-                    <div class="col-6">
-                        Syarif Muhammad Alhaiza
-                    </div>
-                    <div class="col-6">
-                        Khutbah
-                    </div>
-                    <div class="col-6">
-                        Muhammad Vito
-                    </div>
-                </div>
-            </div> --}}
+        {{-- <div class="row bg-success py-4">
+            <div class="col-4 p-2 text-center bg-primary">
+                @livewire('petugas-jumat')
+            </div>
             <div class="col-4 p-2 text-center bg-warning">
                 @livewire('keuangan')
-                {{-- <span class="fs-3">Statistik Keuangan</span>
-                <div class="row g-2 fs-3">
-                    <div class="col-6">
-                        Pemasukan
-                    </div>
-                    <div class="col-6">
-                        Rp. 90.000.000
-                    </div>
-                    <div class="col-6">
-                        Pengeluaran
-                    </div>
-                    <div class="col-6">
-                        Rp. 45.000.000
-                    </div>
-                </div>
-                <div class="row g-2 fs-3">
-                    <div class="col-6">
-                        Beli Sapi Qurban
-                    </div>
-                    <div class="col-6">
-                        Rp. 24.234.000
-                    </div>
-                    <div class="col-6">
-                        Infaq Masjid
-                    </div>
-                    <div class="col-6">
-                        Rp. 2.000.000
-                    </div>
-                </div> --}}
             </div>
-            {{-- <div class="col-4 p-2 text-center bg-primary">
-                <span class="fs-3">Carousel Gambar</span>
-                <div class="row g-2 fs-3">
-                    <div class="col-6">
-                        Muadzin
-                    </div>
-                    <div class="col-6">
-                        Syarif Muhammad Alhaiza
-                    </div>
-                    <div class="col-6">
-                        Khutbah
-                    </div>
-                    <div class="col-6">
-                        Muhammad Vito
-                    </div>
-                </div>
-            </div> --}}
-        </div>
+            <div class="col-4 p-2 text-center bg-secondary">
+                @livewire('gambar')
+            </div>
+        </div> --}}
+        @livewire('gambar')
     </div>
 
     <div class="container-fluid p-4 fs-1 bg-danger d-flex w-full">

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid fs-1 d-flex p-4 bg-success justify-content-between">
         <div class="bg-warning d-flex gap-2 align-items-center fs-1">
-            <img src="img/logo.svg" class="img-fluid" alt="">
+            <img src="{{ asset('gambar/logo.svg')}}" class="img-fluid" alt="">
             Masjid Al-Ikhlas
         </div>
         <div class="d-flex align-items-center">

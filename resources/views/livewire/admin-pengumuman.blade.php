@@ -32,10 +32,11 @@
                             {{ session()->get('error') }}
                         </div>
                     @endif
-                    <div>
-                        <h1 class="font-bold text-red-500">Pengumuman</h1>
+                    <div class="bg-blue-200 rounded-xl">
+                        
+                        <h1 class="font-bold text-red-500 p-3">Pengumuman</h1>
                         @foreach ($pengumuman as $item)
-                        <div class="card bg-blue-200">
+                        <div class="card p-3 ">
                             <div class="flex items-start p-3">
                                 <p class="">{{$loop->iteration}}</p>
                                 <div class=" h-[50px] md:h-[100px] hover:h-[500px] w-full  overflow-hidden transition-all mx-2">
@@ -45,7 +46,7 @@
                                             {{$message}}
                                         @enderror
                                         @else
-                                        <span class="p-4 text-gray-400">{{$item->content}}</span>
+                                        <span class="p-4 text-gray-500">{{$item->content}}</span>
                                         @endif
                                 </div>
                                 <div class="flex flex-col items-center">

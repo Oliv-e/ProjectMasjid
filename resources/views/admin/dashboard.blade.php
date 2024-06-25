@@ -28,6 +28,10 @@
                 <span> Petugas Jumat</span>
                 <a href="{{route('petugas.jumat')}}" class="p-2 px-4 bg-slate-900 hover:bg-slate-700 text-white border rounded-lg">Klik</a>
             </div>
+            <div class="flex justify-between items-center p-6 text-gray-900">
+                <span> Latar Belakang</span>
+                <a href="{{route('gambar')}}" class="p-2 px-4 bg-slate-900 hover:bg-slate-700 text-white border rounded-lg">Klik</a>
+            </div>
         </div>
     
     </div>

@@ -1,4 +1,4 @@
-
+@vite('resources/css/app.css')
 
 <x-app-layout>
     <x-slot name="header">
@@ -7,16 +7,16 @@
                 {{ __('Dashboard') }}
             </h2>
             <h2>
-                Selamat Datang, <span class="text-red-400">{{Auth::user()->name}}</span>
+                Selamat Datang, <span class="">{{Auth::user()->name}}</span>
             </h2>
         </div>
     </x-slot>
 
 
 
-    <div class="py-12 flex flex-col w-full gap-2">
-        <div class="max-w-7xl w-full mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+    <div class="bg-white flex flex-col w-full gap-2 content " >
+        <div class="max-w-7xl w-full h-screen mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden">
                 <div class="flex justify-between items-center p-6 text-gray-900">
                     <span>Manajemen Pengumuman</span>
                     <a href="{{route('pengumuman')}}" class="p-2 px-4 bg-slate-900 hover:bg-slate-700 text-white border rounded-lg">Pengumuman</a>
@@ -31,24 +31,5 @@
                 </div>
             </div>
         </div>
-        
-        
-        {{-- <div class="max-w-7xl w-full mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="flex justify-between items-center p-6 text-gray-900">
-                    <span>Manajemen Tata Letak</span>
-                    <a href="" class="p-2 px-4 bg-slate-900 hover:bg-slate-700 text-white border rounded-lg">Pengumuman</a>
-                </div>
-            </div>
-        </div>
-        <div class="max-w-7xl w-full mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="flex justify-between items-center p-6 text-gray-900">
-                    <span>Manajemen Latar Belakang</span>
-                    <a href="" class="p-2 px-4 bg-slate-900 hover:bg-slate-700 text-white border rounded-lg">Pengumuman</a>
-                </div>
-            </div>
-        </div> --}}
-
     </div>
 </x-app-layout>

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('keuangan', function (Blueprint $table) {
             $table->id();
-            $table->integer('debet');
-            $table->integer('kredit');
-            $table->integer('saldo');
+            $table->integer('debet')->nullable();
+            $table->integer('kredit')->nullable();
+            // $table->integer('saldo');
             $table->string('keterangan');
             // $table->enum('display',['true','false']);
             $table->enum('diarsipkan',['true','false']);

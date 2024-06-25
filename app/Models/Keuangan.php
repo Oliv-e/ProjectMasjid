@@ -12,7 +12,6 @@ class Keuangan extends Model
     protected $fillable = [
         'debet',
         'kredit',
-        'saldo',
         'keterangan',
         'diarsipkan',
     ];

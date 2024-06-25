@@ -35,5 +35,7 @@
             </main>
         </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script src="https://kit.fontawesome.com/59a47457f6.js" crossorigin="anonymous"></script>
 </html>

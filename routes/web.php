@@ -28,6 +28,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/dashboard/petugas/jumat', [AdminController::class, 'jumat'])->name('petugas.jumat');
     Route::get('/dashboard/gambar/edit/{id}', [AdminController::class, 'editGambar'])->name('gambar.edit');
     Route::post('/dashboard/gambar/edit/{id}', [AdminController::class, 'store'])->name('gambar.store');
+    Route::get('/dashboard/gambar/edit/display/{id}', [AdminController::class, 'editDisplay'])->name('gambar.editDisplay');
 });
 
 require __DIR__.'/auth.php';

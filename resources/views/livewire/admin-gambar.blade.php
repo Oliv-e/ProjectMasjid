@@ -42,10 +42,9 @@
                                         <span class="p-4">{{$item->display == 'true' ? 'Ya' : 'Tidak'}}</span>
                                     </td>
                                     <td class="border border-slate-600 text-2xl mx-auto">
-                                        <div class="p-4">
+                                        <div class="p-4 flex gap-4">
                                             <a href="{{route('gambar.edit', $item->id)}}"><i class="bi bi-pen hover:text-amber-500"></i></a>
-                                            <a href=""><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>
-                                            <a href="displays({{$item->id}})"><i class="bi bi-display-fill {{$item->display == 'true' ? 'text-green-500 hover:text-black' : 'text-black hover:text-green-500'}}"></i></a>
+                                            <a href="{{route('gambar.editDisplay', $item->id)}}"><i class="bi bi-display-fill {{$item->display == 'true' ? 'text-green-500 hover:text-black' : 'text-black hover:text-green-500'}}"></i></a>
                                         </div>
                                     </td>
                                 </tr>

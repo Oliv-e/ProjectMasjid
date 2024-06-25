@@ -49,4 +49,23 @@ class AdminController extends Controller
 
         return redirect()->route('gambar')->with('success','Gambar Berhasil di Ganti');
     }
+    public function editDisplay(Request $request, String $id) {
+        // $past = Gambar::findOrFail($id);
+        // if($past->gambar) {
+        //     dd(Storage::delete($past->gambar)); ////-> true
+        // }
+        $gambar = Gambar::findOrFail($id);
+        
+        if($gambar->display == 'true') {
+            $display = 'false';
+        } else {
+            $display = 'true';
+        }
+        
+        Gambar::whereId($id)->update([
+            'display' => $display,
+        ]);
+
+        return redirect()->route('gambar')->with('success','Tampilan Berhasil di Update');
+    }
 }

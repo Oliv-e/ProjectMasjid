@@ -29,7 +29,7 @@
                                     <th class="px-4 py-2 border border-slate-600">Jenis</th>
                                     <th class="px-4 py-2 border border-slate-600">Debet</th>
                                     <th class="px-4 py-2 border border-slate-600">Kredit</th>
-                                    <th class="px-4 py-2 border border-slate-600">Saldo</th>
+                                    {{-- <th class="px-4 py-2 border border-slate-600">Saldo</th> --}}
                                     <th class="px-4 py-2 border border-slate-600">Keterangan</th>
                                     <th class="px-4 py-2 border border-slate-600">Aksi</th>
                                 </tr>
@@ -92,9 +92,9 @@
                                         <span class="p-4">{{$item->kredit}}</span>
                                         @endif
                                     </td>
-                                    <td class="border border-slate-600">
+                                    {{-- <td class="border border-slate-600">
                                         <span class="p-4">{{$data_saldo[$index]}}</span>
-                                    </td>
+                                    </td> --}}
                                     <td class="border border-slate-600">
                                         @if($update && $item->id == $updateId)
                                             <input type="text" wire:model="keterangan" name="keterangan" class="rounded-md @error('keterangan') is-invalid @enderror" placeholder="Masukkan Keterangan">
@@ -157,8 +157,7 @@
                                                 @enderror
                                             @endif
                                         </td>
-                                        <td class="border border-slate-600">
-                                        </td>
+                                        
                                         <td class="border border-slate-600">
                                             <input type="text" wire:model="keterangan" name="keterangan" class="rounded-md @error('keterangan') is-invalid @enderror" placeholder="Masukkan Keterangan">
                                             @error('keterangan')

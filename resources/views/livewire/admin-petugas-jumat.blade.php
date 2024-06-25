@@ -26,6 +26,7 @@
                         </div>
                     @endif
                     <div>
+                        
                         <table class="mx-auto table-auto border-collapse border border-slate-500">
                             <thead>
                                 <tr class="text-2xl">

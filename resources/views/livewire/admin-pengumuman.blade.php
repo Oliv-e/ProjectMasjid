@@ -90,6 +90,7 @@
                                 </div>
                             </div>
                             <div class="flex flex-col py-2 px-8">
+                                <p>apakah ingin di tampilkan</p>
                                 <div class="m-1 flex items-center">
                                     <input wire:model='display' name="display" type="radio" value="true">
                                     <span class="mx-2">Ya</span>

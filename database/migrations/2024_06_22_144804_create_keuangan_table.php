@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('kredit');
             $table->integer('saldo');
             $table->string('keterangan');
-            $table->enum('display',['true','false']);
+            // $table->enum('display',['true','false']);
             $table->enum('diarsipkan',['true','false']);
             $table->timestamps();
         });

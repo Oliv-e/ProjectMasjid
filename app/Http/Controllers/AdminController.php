@@ -28,18 +28,24 @@ class AdminController extends Controller
         return view('admin.Gambar.edit', compact('gambar'));
     }
     public function store(Request $request, String $id) {
-        $past = Gambar::findOrFail($id);
+        // $past = Gambar::findOrFail($id);
         // if($past->gambar) {
         //     dd(Storage::delete($past->gambar)); ////-> true
         // }
-        $gambar = $request->file('gambar');
-        $hash = $gambar->hashName();
-        $gambar->storeAs('public',$hash);
-
-        Gambar::whereId($id)->update([
-            'gambar' => $hash,
-            'display' => $request->display,
-        ]);
+        if($request->gambar) {
+            $gambar = $request->file('gambar');
+            $hash = $gambar->hashName();
+            $gambar->storeAs('public',$hash);
+    
+            Gambar::whereId($id)->update([
+                'gambar' => $hash,
+                'display' => $request->display,
+            ]);
+        } else {
+            Gambar::whereId($id)->update([
+                'display' => $request->display,
+            ]);
+        }
 
         return redirect()->route('gambar')->with('success','Gambar Berhasil di Ganti');
     }

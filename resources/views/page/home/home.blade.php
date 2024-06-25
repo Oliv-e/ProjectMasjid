@@ -19,6 +19,7 @@
                         <a class="login" href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
                     @else
                         <a class="login" href="{{route('login')}}">masuk</a>
+                        <a class="login" href="{{route('register')}}">register</a>
                     @endauth
                 @endif
             </div>

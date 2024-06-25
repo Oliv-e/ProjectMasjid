@@ -4,15 +4,17 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                <div class="shrink-0 flex items-center gap-2">
+                    <a  href="{{ route('dashboard') }}">
                         <img src="{{ asset('gambar/logo.svg')}}" class="img-fluid" alt="">
+                        
                     </a>
+                    <h1 class="font-bold ">Masjid Al-ikhlas</h1>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('pengumuman')" :active="request()->routeIs('pengumuman')">
@@ -26,7 +28,7 @@
                     </x-nav-link>
                     <x-nav-link :href="route('gambar')" :active="request()->routeIs(['gambar','gambar.edit'])">
                         {{ __('Latar Belakang') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
                 </div>
             </div>
 

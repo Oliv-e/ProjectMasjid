@@ -43,6 +43,7 @@
                 <a href="{{route('petugas.jumat')}}" class="p-2 px-4 bg-slate-900 hover:bg-slate-700 text-white border rounded-lg">Petugas Jumat</a>
             </div>
         </div> --}}
+        <p>test</p>
     </div>
 
     

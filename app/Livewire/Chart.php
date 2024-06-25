@@ -21,7 +21,7 @@ class Chart extends Component
         //     ['label' => 'May', 'value' => 56],
         //     ['label' => 'June', 'value' => 55],
         //     ['label' => 'July', 'value' => 40]
-        // ];
+        // ]
         // Mengambil data dari model Keuangan
         $keuangans = Keuangan::select('keterangan', 'saldo')->get();
 

@@ -30,7 +30,7 @@
                             {{ session()->get('error') }}
                         </div>
                     @endif
-                    <div>
+                    <div class="hidden lg:block">
                         <table class="mx-auto table-auto border-collapse border border-slate-500">
                             <thead>
                                 <tr>
@@ -71,7 +71,7 @@
                                     <td class="border border-slate-600"><span class="p-4">{{$item->updated_at}}</span></td>
                                     <td class="border border-slate-600"><span class="p-4">{{Auth::user()->name}}</span></td>
                                     <td class="border border-slate-600 text-2xl mx-auto">
-                                        <div class="p-4">
+                                        <div class="p-4 flex">
                                             @if($update && $item->id == $updateId)
                                                 <a wire:click.prevent="updates({{$item->id}})"><i class="bi bi-floppy hover:text-green-500"></i></a>
                                                 <a wire:click.prevent="cancelEdit({{$item->id}})"><i class="bi bi-x hover:text-red-500"></i></a>

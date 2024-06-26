@@ -6,7 +6,7 @@
     <div class="py-12 flex flex-col w-full gap-2">
         <div class="max-w-7xl w-full flex justify-between mx-auto sm:px-6 lg:px-8 ">
             <a onclick="history.back()"><i class="bi bi-arrow-left rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2 ml-2"></i> Kembali</a>
-            <a wire:click="new()">Tambah Data Keuangan <i class="bi bi-plus rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2 mr-2"></i></a>
+            <a wire:click="new()">Tambah <i class="bi bi-plus rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2 mr-2"></i></a>
         </div>
     </div>
     

@@ -1,4 +1,4 @@
-<div class=" bg-white p-3 rounded-2xl my-2 mx-1 md:w-[300px]">
+<div class=" bg-white p-3 rounded-2xl my-2  w-full lg:w-[300px]">
     <h1>Keuangan</h1>
     <canvas id="myChart"></canvas>
 </div>

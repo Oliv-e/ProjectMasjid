@@ -1,7 +1,7 @@
 <div wire.poll>
     <div class="py-12 flex flex-col w-full gap-2">
         <div class="max-w-7xl w-full flex justify-between mx-auto sm:px-6 lg:px-8">
-            <a onclick="history.back()"><i class="bi bi-arrow-left rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2"></i> Kembali</a>
+            <a class="mx-2" onclick="history.back()"><i class="bi bi-arrow-left rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2"></i> Kembali</a>
         </div>
     </div>
     <div class="py-4 flex flex-col w-full gap-2">
@@ -22,35 +22,26 @@
                         </div>
                     @endif
                     <div>
-                        <table class="mx-auto table-auto border-collapse border border-slate-500">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2 border border-slate-600">No.</th>
-                                    <th class="px-4 py-2 border border-slate-600">Gambar</th>
-                                    <th class="px-4 py-2 border border-slate-600">Ditampilkan</th>
-                                    <th class="px-4 py-2 border border-slate-600">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody wire:poll>
-                                @foreach ($data_gambar as $item)
-                                <tr class="text-center">
-                                    <td class="border border-slate-600"><span class="p-4">{{$item->id}}</span></td>
-                                    <td class="border border-slate-600">
-                                        <img src="{{ asset('storage/'.$item->gambar) }}" alt="{{$item->gambar}}" width="480px">
-                                    </td>
-                                    <td class="border border-slate-600">
-                                        <span class="p-4">{{$item->display == 'true' ? 'Ya' : 'Tidak'}}</span>
-                                    </td>
-                                    <td class="border border-slate-600 text-2xl mx-auto">
-                                        <div class="p-4 flex gap-4">
-                                            <a href="{{route('gambar.edit', $item->id)}}"><i class="bi bi-pen hover:text-amber-500"></i></a>
-                                            <a href="{{route('gambar.editDisplay', $item->id)}}"><i class="bi bi-display-fill {{$item->display == 'true' ? 'text-green-500 hover:text-black' : 'text-black hover:text-green-500'}}"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        @foreach ($data_gambar as $item)
+                            <div wire:poll class="flex flex-col  transition-all">
+                                <div class="img overflow-hidden rounded-xl h-[50px] hover:h-[200px]">
+                                    <img src="/gambar/masjid.jpeg" alt="{{$item->gambar}}">
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="p-4">Sedang ditampilkan : {{$item->display == 'true' ? 'Ya' : 'Tidak'}}</span>
+                                    <div class="flex">
+                                        <a class="p-2 bg-gray-800 rounded text-white mx-1" href="{{route('gambar.editDisplay', $item->id)}}"><i class="bi bi-display-fill  {{$item->display == 'true' ? 'text-green-500 hover:text-black' : 'text-white hover:text-green-500'}}"></i></a>    
+                                        <a class="p-2 bg-gray-800 rounded text-white mx-1" href="{{route('gambar.edit', $item->id)}}"><i class="bi bi-pen hover:text-amber-500"></i></a>
+                                    </div>
+                                </div>
+                                
+                              
+                            </div>
+
+                        @endforeach
+                        
+
+                    
                     </div>
                 </div>
             </div>

@@ -1,9 +1,9 @@
 @extends('page.layout.master')
 
 @section('content')
-    <div class="container-fluid fs-1 d-flex p-4 bg-black bg-opacity-50 justify-content-between align-content-center m-0" style="align-items: center;">
+    <div class="container-fluid fs-1 d-flex p-4 justify-content-between align-content-center m-0" style="align-items: center; background-color: rgba(0, 0, 0, 0.7);">
         <div class="text-white d-flex gap-2 align-items-center fs-1">
-            <img src="{{ asset('gambar/logo.svg')}}" class="img-fluid p-2" alt="">
+            <img src="{{ asset('img/vector.svg')}}" class="img-fluid p-2" alt="">
             <p style="font-size: 23px; font-weight: 500; margin: 0;">Masjid Al-Ikhlas</p>
 
         </div>
@@ -50,20 +50,15 @@
             </button>
         </div>
     
-        <div style="position: fixed; top: 20%; left: 10%; tranform: translate(-50%, -50%); background-color: white; color: rgb(0, 0, 0); padding: 10px, border-radius: 18px; max-width: 30%; width: 20%;">
+        <div style="position: fixed; top: 25%; left: 10%; tranform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.7);; color: white; padding: 10px, border-radius: 18px; max-width: 100%; width: 80%;">
             <div style="display: flex; justify-content: space-evenly; align-items: center; padding: 0;">
                 @livewire('jadwal')
-            </div>
-        </div>
-        <div style="z-index: 10; position: fixed; right: 20%; left: 10%; tranform: translate(-50%, -50%); background-color: white; color: rgb(0, 0, 0); padding: 10px, border-radius: 18px; max-width: 30%; width: 20%;">
-            <div style="display: flex; justify-content: space-evenly; align-items: center; padding: 0;">
-                @livewire('keuangan')
             </div>
         </div>
     </main>
 
 
-    <div class="container">
+    <div class="container" style="position: fixed; top: 55%; left: 15%; tranform: translate(-50%, -50%); background-color: white; color: rgb(0, 0, 0); padding: 10px, border-radius: 18px; max-width: 80%; width: 70%;">
         {{-- <div class="row bg-success py-4">
             <div class="col-4 p-2 text-center bg-primary">
                 @livewire('petugas-jumat')
@@ -78,9 +73,8 @@
         @livewire('gambar')
     </div>
 
-    <div class="container-fluid p-4 fs-1 bg-danger d-flex w-full bg-opacity-50">
+    <div class="container-fluid p-2 fs-1 bg-primary text-white d-flex w-full" style="position: fixed; inset-inline-end: 0; inset-inline-start: 0; z-index: 100; bottom: 0;">
         @livewire('pengumuman')
-    </div>
 @endsection
 @section('scripts')
     <script>

@@ -1,4 +1,4 @@
-<div class=" text-center p-3 flex-col" >
+<div class="d-flex text-center gap-5 p-3" >
     @foreach($data as $nama => $waktu)
     <div class="subuh " >
         <p>{{$nama}}</p>

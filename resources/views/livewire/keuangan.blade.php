@@ -1,4 +1,4 @@
-<div>
+<div style="z-index: 10" class="block">
     <table class="mx-auto table-auto border-collapse border border-slate-500">
         <thead>
             <tr>

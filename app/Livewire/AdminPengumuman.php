@@ -7,7 +7,7 @@ use Livewire\Component;
 class AdminPengumuman extends Component
 {
     public $pengumuman, $content, $display, $updateId, $preview;
-    public $create,$update = false;
+    public $create, $update = false;
     public function mount() {
         $this->pengumuman = \App\Models\Pengumuman::where('diarsipkan', 'false')->get();
         $this->preview = \App\Models\Pengumuman::where('diarsipkan', 'false')->where('display' , 'true')->first();

@@ -8,8 +8,13 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
+    public function home() {
+        $gambar = Gambar::all();
+        return view('page.home.home', compact('gambar'));
+    }
     public function index() {
-        return view('admin.dashboard');
+        $gambar = Gambar::all();
+        return view('admin.dashboard', compact('gambar'));
     }
     public function pengumuman() {
         return view('admin.Pengumuman.home');

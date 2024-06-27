@@ -9,7 +9,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="p-2 bg-slate-300 mb-2 rounded-md">
-                        Maksimal Hanya Menampilkan 3 Latar Belakang
+                        Maksimal Hanya Menampilkan 3 Latar Belakang, Perubahan Otomatis dilakukan dalam 1 Jam. <a wire:click.prevent="review()">Klik disini untuk melakukan perubahan sekarang</a>
                     </div>
                     @if(session()->has('success'))
                         <div>
@@ -23,9 +23,9 @@
                     @endif
                     <div>
                         @foreach ($data_gambar as $item)
-                            <div wire:poll class="flex flex-col  transition-all">
+                            <div wire:poll class="flex flex-col transition-all">
                                 <div class="img overflow-hidden rounded-xl h-[50px] hover:h-[200px]">
-                                    <img src="/gambar/masjid.jpeg" alt="{{$item->gambar}}">
+                                    <img src="{{asset('storage/'.$item->gambar)}}" alt="{{$item->gambar}}">
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <span class="p-4">Sedang ditampilkan : {{$item->display == 'true' ? 'Ya' : 'Tidak'}}</span>
@@ -34,14 +34,8 @@
                                         <a class="p-2 bg-gray-800 rounded text-white mx-1" href="{{route('gambar.edit', $item->id)}}"><i class="bi bi-pen hover:text-amber-500"></i></a>
                                     </div>
                                 </div>
-                                
-                              
                             </div>
-
                         @endforeach
-                        
-
-                    
                     </div>
                 </div>
             </div>

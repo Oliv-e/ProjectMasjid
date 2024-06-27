@@ -7,7 +7,6 @@ use Livewire\Attributes\On;
 
 class Pengumuman extends Component
 {
-
     public $pengumuman;
 
     #[On('pengumuman-updated')]

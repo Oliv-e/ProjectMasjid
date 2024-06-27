@@ -11,11 +11,14 @@ class AdminGambar extends Component
         $this->data_gambar = \App\Models\Gambar::where('diarsipkan', 'false')->get();
     }
     public function displays($id) {
-        $this->resetFields();
         $data = \App\Models\Gambar::find($id);
         $data->update([
             'display' => $this->display
         ]);
+        $this->dispatch('gambar_updated');
+    }
+    public function review() {
+        $this->dispatch('gambar_updated');
     }
     public function render()
     {

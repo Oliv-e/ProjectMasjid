@@ -28,7 +28,7 @@
     </div>
 
     <main class="overflow-hidden">
-        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+        {{-- <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="5000">
                     <img src="img/slide4.jpg" class="d-block w-100" alt="...">
@@ -48,7 +48,8 @@
                 <span class="carousel-control-next-icon d-none" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-        </div>
+        </div> --}}
+        @livewire('gambar')
     
         <div style="position: fixed; top: 25%; left: 10%; tranform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.7);; color: white; padding: 10px, border-radius: 18px; max-width: 100%; width: 80%;">
             <div style="display: flex; justify-content: space-evenly; align-items: center; padding: 0;">
@@ -70,7 +71,6 @@
                 @livewire('gambar')
             </div>
         </div> --}}
-        @livewire('gambar')
     </div>
 
     <div class="container-fluid p-2 fs-1 bg-primary text-white d-flex w-full" style="position: fixed; inset-inline-end: 0; inset-inline-start: 0; z-index: 100; bottom: 0;">

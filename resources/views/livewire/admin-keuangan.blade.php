@@ -1,18 +1,18 @@
-{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> --}}
-
-
 <div>
     <div class="py-12 flex flex-col w-full gap-2">
-        <div class="max-w-7xl w-full flex justify-between mx-auto sm:px-6 lg:px-8 ">
-            <a onclick="history.back()"><i class="bi bi-arrow-left rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2 ml-2"></i> Kembali</a>
-            <a wire:click="new()">Tambah <i class="bi bi-plus rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2 mr-2"></i></a>
+        <div class="md:flex max-w-7xl w-full hidden justify-between mx-auto sm:px-6 lg:px-8">
+            <a onclick="history.back()"><i class="me-4 bi bi-arrow-left rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2"></i> Kembali</a>
+            <a wire:click="new()">Tambah Data Keuangan <i class="ms-4 bi bi-plus rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2"></i></a>
+        </div>
+        <div class="md:hidden max-w-7xl w-[90%] flex justify-between mx-auto sm:px-6 lg:px-8">
+            <a onclick="history.back()"><i class="me-2 bi bi-arrow-left rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2 ml-2"></i></a>
+            <a wire:click="new()">Data Baru <i class="ms-2 bi bi-plus rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2 mr-2"></i></a>
         </div>
     </div>
     
     <div class="flex flex-col w-full gap-2">
         <div class="max-w-8xl w-full mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="hidden lg:block bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     @if(session()->has('success'))
                         <div>
@@ -24,153 +24,366 @@
                             {{ session()->get('error') }}
                         </div>
                     @endif
-                    <h2 class="font-bold text-2xl">Keuangan</h2>
-                    <div class="bg-blue-300 rounded-xl">
-                        @foreach ($data_keuangan as $index => $item)
-                        <div wire:poll class=" text-black transition-all">
-                            <div class="flex items-center p-3 justify-between">
-                                <p class="text-black">{{$loop->iteration}}</p>
-                                @if($update && $item->id == $updateId)
-                                    <label>
-                                        <input type="radio" wire:model="type" value="debet" />
-                                        Debet
-                                    </label>
-                                    <label>
-                                        <input type="radio" wire:model="type" value="kredit" />
-                                        Kredit
-                                    </label>
-                                @else
-                                <span class="p-4">
-                                    @isset ($item->debet)
-                                        <span class="text-white bg-green-700 p-1 rounded-full">Pemasukan</span>
-                                    @else
-                                        <span class="text-white p-1 bg-red-700 rounded-full">Pengeluaran</span>
-                                    @endif
-                                </span>
+                    <div>
+                        <table class="mx-auto table-auto border-collapse border border-slate-500">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-2 border border-slate-600">No.</th>
+                                    <th class="px-4 py-2 border border-slate-600">Hari / Tanggal</th>
+                                    <th class="px-4 py-2 border border-slate-600">Jenis</th>
+                                    <th class="px-4 py-2 border border-slate-600">Pemasukan</th>
+                                    <th class="px-4 py-2 border border-slate-600">Pengeluaran</th>
+                                    <th class="px-4 py-2 border border-slate-600">Saldo</th>
+                                    <th class="px-4 py-2 border border-slate-600">Keterangan</th>
+                                    <th class="px-4 py-2 border border-slate-600">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody wire:poll>
+                                @foreach ($data_keuangan as $index => $item)
+                                <tr class="text-center">
+                                    <td class="border border-slate-600"><span class="p-4">{{$loop->iteration}}</span></td>
+                                    <td class="border border-slate-600">
+                                        @if($update && $item->id == $updateId)
+                                        <input type="date" wire:model="dibuat" name="dibuat" class="rounded-md @error('dibuat') is-invalid @enderror">
+                                        @error('dibuat')
+                                        {{$message}}
+                                        @enderror
+                                        @else
+                                        <?php
+                                        switch ($weekday = $item->created_at->format('l')) {
+                                            case 'Monday':
+                                                $weekday = 'Senin';
+                                                break;
+                                            case 'Tuesday':
+                                                $weekday = 'Selasa';
+                                                break;
+                                            case 'Wednesday':
+                                                $weekday = 'Rabu';
+                                                break;
+                                            case 'Thursday':
+                                                $weekday = 'Kamis';
+                                                break;
+                                            case 'Friday':
+                                                $weekday = 'Jumat';
+                                                break;
+                                            case 'Saturday':
+                                                $weekday = 'Sabtu';
+                                                break;
+                                            case 'Sunday':
+                                                $weekday = 'Minggu';
+                                                break;
+                                        };
+                                        ?>
+                                        <span class="p-4">{{$weekday}}, {{ $item->created_at->format('d-m-Y') }}</span>
+                                        @endif
+                                    </td>
+                                    <td class="border border-slate-600">
+                                        @if($update && $item->id == $updateId)
+                                            <label>
+                                                <input type="radio" wire:model="type" value="debet" />
+                                                Pemasukan
+                                            </label>
+                                            <label>
+                                                <input type="radio" wire:model="type" value="kredit" />
+                                                Pengeluaran
+                                            </label>
+                                        @else
+                                        <span class="p-4">
+                                            @isset ($item->debet)
+                                                Pemasukan
+                                            @else
+                                                Pengeluaran
+                                            @endif
+                                        </span>
+                                        @endif
+                                    </td>
+                                    <td class="border border-slate-600">
+                                        @if($update && $item->id == $updateId)
+                                            @if($type == 'debet')
+                                                <input type="number" wire:model="debet" name="debet" class="rounded-md @error('debet') is-invalid @enderror" placeholder="Masukkan Debet">
+                                                @error('debet')
+                                                    {{$message}}
+                                                @enderror
+                                            @endif
+                                        @else
+                                            @if($item->debet)
+                                                <span class="p-4">Rp. {{number_format($item->debet,0,',','.')}}</span>
+                                            @endif
+                                        @endif
+                                    </td>
+                                    <td class="border border-slate-600">
+                                        @if($update && $item->id == $updateId)
+                                            @if($type == 'kredit')
+                                                <input type="number" wire:model="kredit" name="kredit" class="rounded-md @error('kredit') is-invalid @enderror" placeholder="Masukkan Kredit">
+                                                @error('kredit')
+                                                {{$message}}
+                                                @enderror
+                                            @endif
+                                        @else
+                                        @if($item->kredit)
+                                                <span class="p-4">Rp. {{number_format($item->kredit,0,',','.')}}</span>
+                                            @endif
+                                        @endif
+                                    </td>
+                                    <td class="border border-slate-600">
+                                        <span class="p-4">Rp. {{number_format($data_saldo[$index],0,',','.')}}</span>
+                                    </td>
+                                    <td class="border border-slate-600">
+                                        @if($update && $item->id == $updateId)
+                                            <input type="text" wire:model="keterangan" name="keterangan" class="rounded-md @error('keterangan') is-invalid @enderror" placeholder="Masukkan Keterangan">
+                                            @error('keterangan')
+                                            {{$message}}
+                                            @enderror
+                                        @else
+                                        <span class="p-4">{{$item->keterangan}}</span>
+                                        @endif
+                                    </td>
+                                    <td class="border border-slate-600 text-2xl mx-auto">
+                                        <div class="p-4">
+                                            @if($update && $item->id == $updateId)
+                                                <a wire:click.prevent="updates({{$item->id}})"><i class="bi bi-floppy hover:text-green-500"></i></a>
+                                                <a wire:click.prevent="cancelEdit({{$item->id}})"><i class="bi bi-x hover:text-red-500"></i></a>
+                                            @else
+                                                <a wire:click.prevent="edit({{$item->id}})"><i class="bi bi-pen hover:text-amber-500"></i></a>
+                                                <a wire:click.prevent="delete({{$item->id}})"><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>
+                                                {{-- <a wire:click.prevent="displays({{$item->id}})"><i class="bi bi-display-fill {{$item->display == 'true' ? 'text-green-500 hover:text-black' : 'text-black hover:text-green-500'}}"></i></a> --}}
+                                            @endif
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @if($create == true)
+                                <form>
+                                    <tr class="text-center">
+                                        <td class="border border-slate-600">
+                                            <span><i class="bi bi-plus text-xl"></i></span>
+                                        </td>
+                                        <td class="border border-slate-600">
+                                            <input type="date" wire:model="dibuat" name="dibuat" class="rounded-md @error('dibuat') is-invalid @enderror">
+                                            @error('dibuat')
+                                            {{$message}}
+                                            @enderror
+                                        </td>
+                                        <td class="border border-slate-600">
+                                            <label>
+                                                <input type="radio" wire:model="type" value="debet" />
+                                                Debet
+                                            </label>
+                                            <label>
+                                                <input type="radio" wire:model="type" value="kredit" />
+                                                Kredit
+                                            </label>
+                                        </td>
+                                        <td class="border border-slate-600">
+                                            @if($type == 'debet')
+                                                <input type="number" wire:model="debet" name="debet" class="rounded-md @error('debet') is-invalid @enderror" placeholder="Masukkan Debet">
+                                                @error('debet')
+                                                {{$message}}
+                                                @enderror
+                                            @endif
+                                        </td>
+                                        <td class="border border-slate-600">
+                                            @if($type == 'kredit')
+                                                <input type="number" wire:model="kredit" name="kredit" class="rounded-md @error('kredit') is-invalid @enderror" placeholder="Masukkan Kredit">
+                                                @error('kredit')
+                                                {{$message}}
+                                                @enderror
+                                            @endif
+                                        </td>
+                                        <td class="border border-slate-600">
+                                        </td>
+                                        <td class="border border-slate-600">
+                                            <input type="text" wire:model="keterangan" name="keterangan" class="rounded-md @error('keterangan') is-invalid @enderror" placeholder="Masukkan Keterangan">
+                                            @error('keterangan')
+                                            {{$message}}
+                                            @enderror
+                                        </td>
+                                        <td class="border border-slate-600 text-2xl mx-auto">
+                                            <div class="p-4">
+                                                <a wire:click.prevent="store()"><i class="bi bi-floppy hover:text-green-500"></i></a>
+                                                <a wire:click.prevent="cancel()"><i class="bi bi-x hover:text-red-500"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </form>
                                 @endif
-                                <span class="p-4">Rp. {{$data_saldo[$index]}}</span>
-                                <div class="flex flex-wrap items-center">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="block lg:hidden py-4 flex flex-col w-full gap-2">
+        <div class="max-w-7xl w-[90%] mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden rounded-md shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    @if(session()->has('success'))
+                        <div>
+                            {{ session()->get('success') }}
+                        </div>
+                    @endif
+                    @if(session()->has('error'))
+                        <div>
+                            {{ session()->get('error') }}
+                        </div>
+                    @endif
+                    <div class="w-full flex flex-col gap-2">
+                        @foreach ($data_keuangan as $index => $item)
+                        <div class="card w-full">
+                            <div class="bg-slate-200 rounded-md flex flex-col gap-2 p-3">
+                                <div class="flex items-center">
+                                    <p>{{$loop->iteration}}</p>
+                                    <div class="min-h-5 flex items-center w-full mx-2">
+                                        @if($update && $item->id == $updateId)
+                                            <input type="date" wire:model="dibuat" name="dibuat" class="rounded-md w-full">
+                                            @error('dibuat')
+                                                {{$message}}
+                                            @enderror
+                                        @else
+                                            <?php
+                                            switch ($weekday = $item->created_at->format('l')) {
+                                                case 'Monday':
+                                                    $weekday = 'Senin';
+                                                    break;
+                                                case 'Tuesday':
+                                                    $weekday = 'Selasa';
+                                                    break;
+                                                case 'Wednesday':
+                                                    $weekday = 'Rabu';
+                                                    break;
+                                                case 'Thursday':
+                                                    $weekday = 'Kamis';
+                                                    break;
+                                                case 'Friday':
+                                                    $weekday = 'Jumat';
+                                                    break;
+                                                case 'Saturday':
+                                                    $weekday = 'Sabtu';
+                                                    break;
+                                                case 'Sunday':
+                                                    $weekday = 'Minggu';
+                                                    break;
+                                            };
+                                            ?>
+                                            <span>{{$weekday}}, {{ $item->created_at->format('d-m-Y') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="flex items-center px-4 gap-2">
+                                    @if($update && $item->id == $updateId)
+                                        <label class="flex gap-2 items-center">
+                                            <input type="radio" wire:model="type" value="debet" />
+                                            Pemasukan
+                                        </label>
+                                        <label class="flex gap-2 items-center">
+                                            <input type="radio" wire:model="type" value="kredit" />
+                                            Pengeluaran
+                                        </label>
+                                    @else
+                                        <span>
+                                            @isset ($item->debet)
+                                                Jenis : Pemasukan
+                                            @else
+                                                Jenis : Pengeluaran
+                                            @endif
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="flex flex-col w-full">
+                                    <div class="px-4 my-2">
+                                        <span>Jumlah : </span>
+                                    </div>
+                                    <div class="flex items-center w-full px-4">
+                                        @if($update && $item->id == $updateId)
+                                            @if($type == 'debet')
+                                                <input type="number" wire:model="debet" name="debet" class="w-full rounded-md" placeholder="Masukkan Debet">
+                                                @error('debet')
+                                                    {{$message}}
+                                                @enderror
+                                            @endif
+                                        @else
+                                            @if($item->debet)
+                                                <span>Rp. {{number_format($item->debet,0,',','.')}}</span>
+                                            @endif
+                                        @endif
+                                    </div>
+                                    <div class="flex items-center w-full px-4">
+                                        @if($update && $item->id == $updateId)
+                                            @if($type == 'kredit')
+                                                <input type="number" wire:model="kredit" name="kredit" class="w-full rounded-md" placeholder="Masukkan kredit">
+                                                @error('kredit')
+                                                    {{$message}}
+                                                @enderror
+                                            @endif
+                                        @else
+                                            @if($item->kredit)
+                                                <span>Rp. {{number_format($item->kredit,0,',','.')}}</span>
+                                            @endif
+                                        @endif
+                                    </div>
+                                    <div class="px-4 my-2">
+                                        <span>Sisa Saldo : </span>
+                                    </div>
+                                    <div class="px-4">
+                                        <span>Rp. {{number_format($data_saldo[$index],0,',','.')}}</span>
+                                    </div>
+                                    <div class="px-4 my-2">
+                                        <span>Keterangan : </span>
+                                    </div>
+                                    <div class="px-4 w-full">
+                                        @if($update && $item->id == $updateId)
+                                            <input type="text" wire:model="keterangan" name="keterangan" class="w-full rounded-md @error('keterangan') is-invalid @enderror" placeholder="Masukkan Keterangan">
+                                            @error('keterangan')
+                                            {{$message}}
+                                            @enderror
+                                        @else
+                                        <span>{{$item->keterangan}}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex mt-3 items-center gap-x-4 text-2xl justify-end">
                                     @if($update && $item->id == $updateId)
                                         <a wire:click.prevent="updates({{$item->id}})"><i class="bi bi-floppy hover:text-green-500"></i></a>
                                         <a wire:click.prevent="cancelEdit({{$item->id}})"><i class="bi bi-x hover:text-red-500"></i></a>
                                     @else
                                         <a wire:click.prevent="edit({{$item->id}})"><i class="bi bi-pen hover:text-amber-500"></i></a>
                                         <a wire:click.prevent="delete({{$item->id}})"><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>
-                                       
-                                    @endif
-                             </div>
-                            </div>
-                            <div class="flex flex-col">
-                                <div class="flex">
-                                    <span class="px-4">Tanggal:</span>
-                                    @if($update && $item->id == $updateId)
-                                        <input type="date" wire:model="dibuat" name="dibuat" class="rounded-md @error('dibuat') is-invalid @enderror">
-                                        @error('dibuat')
-                                        {{$message}}
-                                        @enderror
-                                        @else
-                                        <span class="px-2">{{$item->created_at}}</span>
-                                        @endif
-                                    
-                                </div>
-                                <div class="flex">
-                                    <span class="px-4">Keterangan:</span>
-                                    @if($update && $item->id == $updateId)
-                                        <input type="text" wire:model="keterangan" name="keterangan" class="rounded-md @error('keterangan') is-invalid @enderror" placeholder="Masukkan Keterangan">
-                                        @error('keterangan')
-                                        {{$message}}
-                                        @enderror
-                                    @else
-                                    <span class="px-2 pb-2">{{$item->keterangan}}</span>
                                     @endif
                                 </div>
-                                <div class="flex flex-col w-2/3 text-black">
-                                    @if($update && $item->id == $updateId)
-                                            @if($type == 'debet')
-                                                <label class="text-white" for="">Debet : </label>
-                                                <input type="number" wire:model="debet" name="debet" class="rounded-md text-black @error('debet') is-invalid @enderror" placeholder="Masukkan Debet">
-                                                @error('debet')
-                                                {{$message}}
-                                                @enderror
-                                            @endif
-                                        @else
-                                        <span class="px-4 text-white">Debet : Rp. {{$item->debet}}</span>
-                                        @endif
-                                        @if($update && $item->id == $updateId)
-                                            @if($type == 'kredit')
-                                            <label for="">Kredit :</label>
-                                                <input type="number" wire:model="kredit" name="kredit" class="rounded-md  @error('kredit') is-invalid @enderror" placeholder="Masukkan Kredit">
-                                                @error('kredit')
-                                                {{$message}}
-                                                @enderror
-                                            @endif
-                                        @else
-                                        <span class="text-white px-4 pb-4"  >Kredit : Rp. {{$item->kredit}}</span>
-                                        @endif
+                        </div>
+                        @endforeach
+                        @if ($create == true)
+                        <div class="card bg-slate-300 rounded-md">
+                            <div class="flex flex-col gap-2 p-2 mt-1">
+                                <div class=" w-full overflow-hidden transition-all">
+                                    <input type="text" wire:model="content" name="content" class="w-full rounded-md @error('content') is-invalid @enderror" placeholder="Masukkan Pengumuman">
+                                    @error('content')
+                                    {{$message}}
+                                    @enderror
+                                </div>
+                                <div class="flex flex-row gap-2 text-sm justify-between">
+                                    <p class="my-1 flex">Ingin di Tampilkan?</p>
+                                    <div class="flex flex-row gap-2">
+                                        <div class="m-1 flex items-center">
+                                            <input wire:model='display' name="display" type="radio" value="true">
+                                            <span class="mx-2">Ya</span>
+                                        </div>
+                                        <div class="m-1 flex items-center">
+                                            <input wire:model='display' name="display" type="radio" value="false">
+                                            <label class="mx-2">Tidak</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-row gap-2 py-2 text-2xl justify-end">
+                                    <a wire:click.prevent="store()"><i class="bi bi-floppy hover:text-green-500"></i></a>
+                                    <a wire:click.prevent="cancel()"><i class="bi bi-x hover:text-red-500 hover:bg-red-200 bg-red-700 px-1 my-1 rounded-md text-white"></i></a>
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                        
-                        @endforeach
-                        @if ($create == true)
-                        <form action="">
-                            <div wire:poll class=" text-black transition-all">
-                                <div class="flex items-center p-3 justify-between">
-                                    <p class="text-black"><i class="bi bi-plus"></i></p>
-                                    
-                                    <label>
-                                        <input type="radio" wire:model="type" value="debet" />
-                                        Debet
-                                    </label>
-                                    <label>
-                                        <input type="radio" wire:model="type" value="kredit" />
-                                        Kredit
-                                    </label>
-                                    
-                                    <div class="flex flex-wrap items-center">
-                                        <a wire:click.prevent="store()"><i class="bi bi-floppy hover:text-green-500"></i></a>
-                                        <a wire:click.prevent="cancel()"><i class="bi bi-x hover:text-red-500"></i></a>
-                                   
-                                    </div>
-                                </div>
-                                <div class="flex flex-col">
-                                    <div class="flex">
-                                        <span class="px-4">Tanggal:</span>
-                                        <input type="date" wire:model="dibuat" name="dibuat" class="rounded-md @error('dibuat') is-invalid @enderror">
-                                                @error('dibuat')
-                                                {{$message}}
-                                                @enderror
-                                        
-                                    </div>
-                                    <div class="flex">
-                                        <span class="px-4">Keterangan:</span>
-                                        <input type="text" wire:model="keterangan" name="keterangan" class="rounded-md @error('keterangan') is-invalid @enderror" placeholder="Masukkan Keterangan">
-                                        @error('keterangan')
-                                        {{$message}}
-                                        @enderror
-                                    </div>
-                                    <div class="flex flex-col w-2/3 text-black">
-                                        @if($type == 'debet')
-                                                    <input type="number" wire:model="debet" name="debet" class="rounded-md @error('debet') is-invalid @enderror" placeholder="Masukkan Debet">
-                                                    @error('debet')
-                                                    {{$message}}
-                                                    @enderror
-                                                @endif
-                                                @if($type == 'kredit')
-                                                <input type="number" wire:model="kredit" name="kredit" class="rounded-md @error('kredit') is-invalid @enderror" placeholder="Masukkan Kredit">
-                                                @error('kredit')
-                                                {{$message}}
-                                                @enderror
-                                            @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
                         @endif
-                        
-                    
                     </div>
                 </div>
             </div>

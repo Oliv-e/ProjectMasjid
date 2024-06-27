@@ -347,7 +347,7 @@
                             <div class="flex mt-3 items-center gap-x-4 text-2xl justify-end">
                                     @if($update && $item->id == $updateId)
                                         <a wire:click.prevent="updates({{$item->id}})"><i class="bi bi-floppy hover:text-green-500"></i></a>
-                                        <a wire:click.prevent="cancelEdit({{$item->id}})"><i class="bi bi-x hover:text-red-500"></i></a>
+                                        <a wire:click.prevent="cancelEdit({{$item->id}})"><i class="bi bg-red-300 rounded-full px-2 py-1 bi-x hover:text-red-500"></i></a>
                                     @else
                                         <a wire:click.prevent="edit({{$item->id}})"><i class="bi bi-pen hover:text-amber-500"></i></a>
                                         <a wire:click.prevent="delete({{$item->id}})"><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>

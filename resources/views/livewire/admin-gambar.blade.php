@@ -1,6 +1,6 @@
 <div wire.poll>
     <div class="py-12 flex flex-col w-full gap-2">
-        <div class="max-w-7xl w-full flex justify-between mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl w-[90%] md:w-full flex justify-between mx-auto sm:px-6 lg:px-8">
             <a class="mx-2" onclick="history.back()"><i class="bi bi-arrow-left rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2"></i> Kembali</a>
         </div>
     </div>
@@ -9,7 +9,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="p-2 bg-slate-300 mb-2 rounded-md">
-                        Maksimal Hanya Menampilkan 3 Latar Belakang, Perubahan Otomatis dilakukan dalam 1 Jam. <a wire:click.prevent="review()">Klik disini untuk melakukan perubahan sekarang</a>
+                        Maksimal Hanya Menampilkan 3 Latar Belakang, Perubahan Otomatis dilakukan dalam 1 Jam.
                     </div>
                     @if(session()->has('success'))
                         <div>
@@ -21,11 +21,11 @@
                             {{ session()->get('error') }}
                         </div>
                     @endif
-                    <div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         @foreach ($data_gambar as $item)
-                            <div wire:poll class="flex flex-col transition-all">
-                                <div class="img overflow-hidden rounded-xl h-[50px] hover:h-[200px]">
-                                    <img src="{{asset('storage/'.$item->gambar)}}" alt="{{$item->gambar}}">
+                            <div wire:poll>
+                                <div>
+                                    <img src="{{asset('storage/'.$item->gambar)}}" class="rounded-xl" alt="{{$item->gambar}}">
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <span class="p-4">Sedang ditampilkan : {{$item->display == 'true' ? 'Ya' : 'Tidak'}}</span>

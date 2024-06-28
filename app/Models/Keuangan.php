@@ -14,5 +14,6 @@ class Keuangan extends Model
         'kredit',
         'keterangan',
         'diarsipkan',
+        'created_at'
     ];
 }

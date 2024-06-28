@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\PengumumanController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [AdminController::class, 'home'])->name('home');
-Route::get('/c', function() {
-    $itemDate = \Carbon\Carbon::parse(now());
-    dd($itemDate);
-});
-
 Route::middleware(['auth'])->group(function() {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/pengumuman', [AdminController::class, 'pengumuman'])->name('pengumuman');
@@ -32,5 +25,9 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/dashboard/gambar/edit/{id}', [AdminController::class, 'store'])->name('gambar.store');
     Route::get('/dashboard/gambar/edit/display/{id}', [AdminController::class, 'editDisplay'])->name('gambar.editDisplay');
 });
-
+Route::middleware(['super_admin'])->group(function() {
+    Route::get('/text', function() {
+        return view('page.home.home');
+    });
+});
 require __DIR__.'/auth.php';

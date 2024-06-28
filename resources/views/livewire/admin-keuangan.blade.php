@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     <div class="py-12 flex flex-col w-full gap-2">
         <div class="md:flex max-w-7xl w-full hidden justify-between mx-auto sm:px-6 lg:px-8">
             <a onclick="history.back()"><i class="me-4 bi bi-arrow-left rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2"></i> Kembali</a>
@@ -24,8 +24,23 @@
                             {{ session()->get('error') }}
                         </div>
                     @endif
+                    <div class="max-w-4xl mx-auto">
+                        <form>
+                            <select wire:model="month" wire:change="search" class="rounded-md">
+                                @foreach(range(1, 12) as $month)
+                                    <option value="{{ $month }}">{{ $month }}</option>
+                                @endforeach
+                            </select>
+                            <select wire:model="year" wire:change="search" class="rounded-md">
+                                @foreach(range(date('Y'), 2020) as $year)
+                                    <option value="{{ $year }}">{{ $year }}</option>
+                                @endforeach
+                            </select>
+                            {{-- <button type="submit" class="bg-slate-900 rounded-md py-2 px-4 text-white" wire:click.prevent="search()">Cari</button> --}}
+                        </form>
+                    </div>
                     <div>
-                        <table class="mx-auto table-auto border-collapse border border-slate-500">
+                        <table class="mt-2 mx-auto table-auto border-collapse border border-slate-500">
                             <thead>
                                 <tr>
                                     <th class="px-4 py-2 border border-slate-600">No.</th>
@@ -38,7 +53,7 @@
                                     <th class="px-4 py-2 border border-slate-600">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody wire:poll>
+                            <tbody>
                                 @foreach ($data_keuangan as $index => $item)
                                 <tr class="text-center">
                                     <td class="border border-slate-600"><span class="p-4">{{$loop->iteration}}</span></td>
@@ -167,11 +182,11 @@
                                         <td class="border border-slate-600">
                                             <label>
                                                 <input type="radio" wire:model="type" value="debet" />
-                                                Debet
+                                                Pemasukan
                                             </label>
                                             <label>
                                                 <input type="radio" wire:model="type" value="kredit" />
-                                                Kredit
+                                                Pengeluaran
                                             </label>
                                         </td>
                                         <td class="border border-slate-600">
@@ -230,6 +245,18 @@
                         </div>
                     @endif
                     <div class="w-full flex flex-col gap-2">
+                        <div class="flex gap-2">
+                            <select wire:model="month" class="rounded-md">
+                                @foreach(range(1, 12) as $month)
+                                    <option value="{{ $month }}">{{ $month }}</option>
+                                @endforeach
+                            </select>
+                            <select wire:model="year" class="rounded-md">
+                                @foreach(range(date('Y'), 2020) as $year)
+                                    <option value="{{ $year }}">{{ $year }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         @foreach ($data_keuangan as $index => $item)
                         <div class="card w-full">
                             <div class="bg-slate-200 rounded-md flex flex-col gap-2 p-3">
@@ -359,7 +386,7 @@
                         <div class="card bg-slate-300 rounded-md">
                             <div class="flex flex-col gap-2 p-2 mt-1">
                                 <div class=" w-full overflow-hidden transition-all">
-                                    <input type="text" wire:model="content" name="content" class="w-full rounded-md @error('content') is-invalid @enderror" placeholder="Masukkan Pengumuman">
+                                    <input type="text" name="content" class="w-full rounded-md @error('content') is-invalid @enderror" placeholder="Masukkan Pengumuman">
                                     @error('content')
                                     {{$message}}
                                     @enderror
@@ -368,11 +395,11 @@
                                     <p class="my-1 flex">Ingin di Tampilkan?</p>
                                     <div class="flex flex-row gap-2">
                                         <div class="m-1 flex items-center">
-                                            <input wire:model='display' name="display" type="radio" value="true">
+                                            <input name="display" type="radio" value="true">
                                             <span class="mx-2">Ya</span>
                                         </div>
                                         <div class="m-1 flex items-center">
-                                            <input wire:model='display' name="display" type="radio" value="false">
+                                            <input name="display" type="radio" value="false">
                                             <label class="mx-2">Tidak</label>
                                         </div>
                                     </div>

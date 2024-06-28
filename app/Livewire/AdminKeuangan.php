@@ -7,13 +7,32 @@ use Livewire\Component;
 
 class AdminKeuangan extends Component
 {
-    public $data_keuangan, $dibuat, $type, $debet, $kredit, $saldo = 0, $keterangan, $updateId, $preview;
-    public $data_saldo = [];
+    public $year, $month, $data_keuangan, $dibuat, $type, $debet, $kredit, $saldo, $keterangan, $updateId, $preview;
+    public $data_saldo;
     public $create , $update = false;
-
     public function mount() {
-        $this->data_keuangan = \App\Models\Keuangan::where('diarsipkan', 'false')->orderBy('created_at', 'desc')->get();
-        $data_uang = \App\Models\Keuangan::where('diarsipkan', 'false')->orderBy('created_at', 'asc')->get();
+        if (!$this->year) {
+            $this->year = date('Y');
+        }
+        if (!$this->month) {
+            $this->month = date('m');
+        }
+
+        $this->data_keuangan = \App\Models\Keuangan::where('diarsipkan', 'false')
+        ->whereYear('created_at', $this->year)
+        ->whereMonth('created_at', $this->month)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        $this->saldo = 0;
+        $this->data_saldo = [];
+
+        $data_uang = \App\Models\Keuangan::where('diarsipkan', 'false')
+        ->whereYear('created_at', $this->year)
+        ->whereMonth('created_at', '<=', $this->month)
+        ->orderBy('created_at', 'asc')
+        ->get();
+
         foreach($data_uang as $index => $data) {
             if ($data->debet) {
                 $this->saldo += $data->debet;
@@ -37,6 +56,9 @@ class AdminKeuangan extends Component
         $this->kredit = '';
         $this->keterangan = '';
     }
+    public function search() {
+        $this->mount();
+    }
     public function new() {
         $this->create = true;
         $this->update = false;
@@ -53,7 +75,7 @@ class AdminKeuangan extends Component
                 'kredit' => $this->kredit,
                 'keterangan' => $this->keterangan,
                 'diarsipkan' => 'false',
-                'created_at' => $this->dibuat,
+                'created_at' => Carbon::parse($this->dibuat)->format('Y-m-d H:i:s'),
                 'updated_at' => $this->dibuat,
             ]);
             session()->flash('success','Data Keuangan Berhasil Ditambah!');

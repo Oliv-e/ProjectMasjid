@@ -75,7 +75,7 @@ class AdminKeuangan extends Component
                 'kredit' => $this->kredit,
                 'keterangan' => $this->keterangan,
                 'diarsipkan' => 'false',
-                'created_at' => Carbon::parse($this->dibuat)->format('Y-m-d H:i:s'),
+                'created_at' => $this->dibuat,
                 'updated_at' => $this->dibuat,
             ]);
             session()->flash('success','Data Keuangan Berhasil Ditambah!');

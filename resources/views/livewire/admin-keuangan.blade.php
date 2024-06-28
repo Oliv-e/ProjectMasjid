@@ -25,19 +25,16 @@
                         </div>
                     @endif
                     <div class="max-w-4xl mx-auto">
-                        <form>
-                            <select wire:model="month" wire:change="search" class="rounded-md">
-                                @foreach(range(1, 12) as $month)
-                                    <option value="{{ $month }}">{{ $month }}</option>
-                                @endforeach
-                            </select>
-                            <select wire:model="year" wire:change="search" class="rounded-md">
-                                @foreach(range(date('Y'), 2020) as $year)
-                                    <option value="{{ $year }}">{{ $year }}</option>
-                                @endforeach
-                            </select>
-                            {{-- <button type="submit" class="bg-slate-900 rounded-md py-2 px-4 text-white" wire:click.prevent="search()">Cari</button> --}}
-                        </form>
+                        <select wire:model="month" wire:change="search" class="rounded-md">
+                            @foreach(range(1, 12) as $month)
+                                <option value="{{ $month }}">{{ $month }}</option>
+                            @endforeach
+                        </select>
+                        <select wire:model="year" wire:change="search" class="rounded-md">
+                            @foreach(range(date('Y'), 2020) as $year)
+                                <option value="{{ $year }}">{{ $year }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div>
                         <table class="mt-2 mx-auto table-auto border-collapse border border-slate-500">
@@ -54,12 +51,67 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if($create == true)
+                                <form>
+                                    <tr class="text-center">
+                                        <td class="border border-slate-600">
+                                            <span><i class="bi bi-plus text-xl"></i></span>
+                                        </td>
+                                        <td class="border border-slate-600">
+                                            <input type="datetime-local" wire:model="dibuat" name="dibuat" class="rounded-md @error('dibuat') is-invalid @enderror">
+                                            @error('dibuat')
+                                            {{$message}}
+                                            @enderror
+                                        </td>
+                                        <td class="border border-slate-600">
+                                            <label>
+                                                <input type="radio" wire:model="type" value="debet" />
+                                                Pemasukan
+                                            </label>
+                                            <label>
+                                                <input type="radio" wire:model="type" value="kredit" />
+                                                Pengeluaran
+                                            </label>
+                                        </td>
+                                        <td class="border border-slate-600">
+                                            @if($type == 'debet')
+                                                <input type="number" wire:model="debet" name="debet" class="rounded-md @error('debet') is-invalid @enderror" placeholder="Masukkan Debet">
+                                                @error('debet')
+                                                {{$message}}
+                                                @enderror
+                                            @endif
+                                        </td>
+                                        <td class="border border-slate-600">
+                                            @if($type == 'kredit')
+                                                <input type="number" wire:model="kredit" name="kredit" class="rounded-md @error('kredit') is-invalid @enderror" placeholder="Masukkan Kredit">
+                                                @error('kredit')
+                                                {{$message}}
+                                                @enderror
+                                            @endif
+                                        </td>
+                                        <td class="border border-slate-600">
+                                        </td>
+                                        <td class="border border-slate-600">
+                                            <input type="text" wire:model="keterangan" name="keterangan" class="rounded-md @error('keterangan') is-invalid @enderror" placeholder="Masukkan Keterangan">
+                                            @error('keterangan')
+                                            {{$message}}
+                                            @enderror
+                                        </td>
+                                        <td class="border border-slate-600 text-2xl mx-auto">
+                                            <div class="p-4">
+                                                <a wire:click.prevent="store()"><i class="bi bi-floppy hover:text-green-500"></i></a>
+                                                <a wire:click.prevent="cancel()"><i class="bi bi-x hover:text-red-500"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </form>
+                                @endif
                                 @foreach ($data_keuangan as $index => $item)
                                 <tr class="text-center">
                                     <td class="border border-slate-600"><span class="p-4">{{$loop->iteration}}</span></td>
                                     <td class="border border-slate-600">
                                         @if($update && $item->id == $updateId)
-                                        <input type="date" wire:model="dibuat" name="dibuat" class="rounded-md @error('dibuat') is-invalid @enderror">
+                                        <input type="datetime-local" wire:model="dibuat" name="dibuat" class="rounded-md @error('dibuat') is-invalid @enderror">
                                         @error('dibuat')
                                         {{$message}}
                                         @enderror
@@ -167,61 +219,6 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                                @if($create == true)
-                                <form>
-                                    <tr class="text-center">
-                                        <td class="border border-slate-600">
-                                            <span><i class="bi bi-plus text-xl"></i></span>
-                                        </td>
-                                        <td class="border border-slate-600">
-                                            <input type="date" wire:model="dibuat" name="dibuat" class="rounded-md @error('dibuat') is-invalid @enderror">
-                                            @error('dibuat')
-                                            {{$message}}
-                                            @enderror
-                                        </td>
-                                        <td class="border border-slate-600">
-                                            <label>
-                                                <input type="radio" wire:model="type" value="debet" />
-                                                Pemasukan
-                                            </label>
-                                            <label>
-                                                <input type="radio" wire:model="type" value="kredit" />
-                                                Pengeluaran
-                                            </label>
-                                        </td>
-                                        <td class="border border-slate-600">
-                                            @if($type == 'debet')
-                                                <input type="number" wire:model="debet" name="debet" class="rounded-md @error('debet') is-invalid @enderror" placeholder="Masukkan Debet">
-                                                @error('debet')
-                                                {{$message}}
-                                                @enderror
-                                            @endif
-                                        </td>
-                                        <td class="border border-slate-600">
-                                            @if($type == 'kredit')
-                                                <input type="number" wire:model="kredit" name="kredit" class="rounded-md @error('kredit') is-invalid @enderror" placeholder="Masukkan Kredit">
-                                                @error('kredit')
-                                                {{$message}}
-                                                @enderror
-                                            @endif
-                                        </td>
-                                        <td class="border border-slate-600">
-                                        </td>
-                                        <td class="border border-slate-600">
-                                            <input type="text" wire:model="keterangan" name="keterangan" class="rounded-md @error('keterangan') is-invalid @enderror" placeholder="Masukkan Keterangan">
-                                            @error('keterangan')
-                                            {{$message}}
-                                            @enderror
-                                        </td>
-                                        <td class="border border-slate-600 text-2xl mx-auto">
-                                            <div class="p-4">
-                                                <a wire:click.prevent="store()"><i class="bi bi-floppy hover:text-green-500"></i></a>
-                                                <a wire:click.prevent="cancel()"><i class="bi bi-x hover:text-red-500"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </form>
-                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -245,13 +242,51 @@
                         </div>
                     @endif
                     <div class="w-full flex flex-col gap-2">
+                        @if ($create == true)
+                        <div class="card bg-slate-200 rounded-md">
+                            <div class="flex flex-col gap-2 p-2 mt-1">
+                                <div class=" w-full overflow-hidden transition-all">
+                                    <p class="my-1">Hari / Tanggal</p>
+                                    <input type="datetime-local" wire:model="dibuat" name="dibuat" class="rounded-md w-full">
+                                </div>
+                                <div class="flex flex-row gap-1 text-sm justify-between">
+                                    <p class="my-1 flex">Jenis</p>
+                                    <div class="flex flex-row">
+                                        <div class="m-1 flex items-center">
+                                            <input wire:model="type" type="radio" value="debet">
+                                            <span class="mx-2">Pemasukan</span>
+                                        </div>
+                                        <div class="m-1 flex items-center">
+                                            <input wire:model="type" type="radio" value="kredit">
+                                            <label class="mx-2">Pengeluaran</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-row gap-2 text-sm justify-between">
+                                @if($type == 'debet')
+                                    <input type="number" wire:model="debet" name="debet" class="w-full rounded-md" placeholder="Jumlah Masuk (Rp)">
+                                @elseif ($type == 'kredit')
+                                    <input type="number" wire:model="kredit" name="kredit" class="w-full rounded-md" placeholder="Jumlah Keluar (Rp)">
+                                @endif
+                                </div>
+                                <div class=" w-full overflow-hidden transition-all">
+                                    <p class="my-1">Keterangan</p>
+                                    <input type="text" wire:model="keterangan" class="rounded-md w-full" placeholder="Masukkan Keterangan">
+                                </div>
+                                <div class="flex flex-row gap-2 py-2 text-2xl justify-end">
+                                    <a wire:click.prevent="store()"><i class="bi bi-floppy hover:text-green-500"></i></a>
+                                    <a wire:click.prevent="cancel()"><i class="bi bi-x hover:text-red-500 hover:bg-red-200 bg-red-700 px-1 my-1 rounded-md text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="flex gap-2">
-                            <select wire:model="month" class="rounded-md">
+                            <select wire:model="month" wire:change="search" class="rounded-md">
                                 @foreach(range(1, 12) as $month)
                                     <option value="{{ $month }}">{{ $month }}</option>
                                 @endforeach
                             </select>
-                            <select wire:model="year" class="rounded-md">
+                            <select wire:model="year" wire:change="search" class="rounded-md">
                                 @foreach(range(date('Y'), 2020) as $year)
                                     <option value="{{ $year }}">{{ $year }}</option>
                                 @endforeach
@@ -264,7 +299,7 @@
                                     <p>{{$loop->iteration}}</p>
                                     <div class="min-h-5 flex items-center w-full mx-2">
                                         @if($update && $item->id == $updateId)
-                                            <input type="date" wire:model="dibuat" name="dibuat" class="rounded-md w-full">
+                                            <input type="datetime-local" wire:model="dibuat" name="dibuat" class="rounded-md w-full">
                                             @error('dibuat')
                                                 {{$message}}
                                             @enderror
@@ -382,35 +417,6 @@
                                 </div>
                         </div>
                         @endforeach
-                        @if ($create == true)
-                        <div class="card bg-slate-300 rounded-md">
-                            <div class="flex flex-col gap-2 p-2 mt-1">
-                                <div class=" w-full overflow-hidden transition-all">
-                                    <input type="text" name="content" class="w-full rounded-md @error('content') is-invalid @enderror" placeholder="Masukkan Pengumuman">
-                                    @error('content')
-                                    {{$message}}
-                                    @enderror
-                                </div>
-                                <div class="flex flex-row gap-2 text-sm justify-between">
-                                    <p class="my-1 flex">Ingin di Tampilkan?</p>
-                                    <div class="flex flex-row gap-2">
-                                        <div class="m-1 flex items-center">
-                                            <input name="display" type="radio" value="true">
-                                            <span class="mx-2">Ya</span>
-                                        </div>
-                                        <div class="m-1 flex items-center">
-                                            <input name="display" type="radio" value="false">
-                                            <label class="mx-2">Tidak</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex flex-row gap-2 py-2 text-2xl justify-end">
-                                    <a wire:click.prevent="store()"><i class="bi bi-floppy hover:text-green-500"></i></a>
-                                    <a wire:click.prevent="cancel()"><i class="bi bi-x hover:text-red-500 hover:bg-red-200 bg-red-700 px-1 my-1 rounded-md text-white"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
                     </div>
                 </div>
             </div>

@@ -31,13 +31,25 @@ Fitur
 --------------------------------------------------------
 Revisi
 --------------------------------------------------------
-- No Revisi
+- 26 June 24
+-- Filter Data
+-- Paginasi Data
+-- History Pengurus Jumat
 --------------------------------------------------------
 Bugs
 --------------------------------------------------------
-- No Bugs found
+- symlink di prod
 --------------------------------------------------------
 Testing
 --------------------------------------------------------
-- Belum Test
+- symlink
 --------------------------------------------------------
+To Do List
+--------------------------------------------------------
+- Implementasi Sweetalert ke DataTable
+- Menambah History di Pengurus Jumat
+- Membuat SuperAdmin
+-- Membuat Log User
+-- Membuat Data Table Recovery Data
+- Membuat Tata Letak Landing Page
+- Paginasi data

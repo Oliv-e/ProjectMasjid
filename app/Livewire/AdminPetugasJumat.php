@@ -69,7 +69,7 @@ class AdminPetugasJumat extends Component
                 'bagian' => 'Petugas Jumat ID '. $pjc->id,
                 'aktivitas' => 'Membuat',
                 'oleh' => Auth::user()->name,
-                'keterangan' => ' Khotib : '. $pjc->khotib .' Imam : '. $pjc->imam .' Muadzin : '. $pjc->muadzin .' Bilal : '. $pjc->bilal . 'Tanggal : ' , $pjc->created_at ,
+                'keterangan' => ' Khotib : '. $pjc->khotib .' Imam : '. $pjc->imam .' Muadzin : '. $pjc->muadzin .' Bilal : '. $pjc->bilal . ' Tanggal : ' , $pjc->created_at ,
                 'role' => Auth::user()->role
             ]);
             session()->flash('success','Data Petugas Berhasil Dibuat!');

@@ -24,12 +24,12 @@ Fitur
 --------------------------------------------------------
 1. Guest
    - Melihat Landing Page Yang Memuat Informasi Countdown Waktu Sekarang s.d. Waktu Sholat Berikutnya, Jam, Pengumuman, Petugas Hari Jumat, dan Alur Keuangan
-2. Admin
-   - Melihat Dashboard, Manajemen Pengumuman, Keuangan dan Petugas Jumat
-3. Admin 2
-   - Melihat Dashboard, Manajemen Pengumuman, Keuangan, Petugas Jumat, Mengelola Akun dan Melihat Log Histori
+2. Moderator
+   - Melihat Dashboard, Manajemen Pengumuman, Keuangan dan Petugas Jumat, Melihat Log History Sendiri
+3. Admin
+   - Melihat Dashboard, Manajemen Pengumuman, Keuangan, Petugas Jumat, Mengelola Akun dan Melihat Log Histori Admin & Moderator
 3. Super Admin
-   - Melihat Dashboard, Manajemen Pengumuman, Keuangan, Petugas Jumat, Mengelola Akun, Manajemen Log Histori dan Recovery Data Terhapus
+   - Melihat Dashboard, Manajemen Pengumuman, Keuangan, Petugas Jumat, Mengelola Akun, Melihat Log Histori dan Recovery Data Terhapus
 --------------------------------------------------------
 Revisi
 --------------------------------------------------------

@@ -52,7 +52,7 @@ class AdminController extends Controller
                 'bagian' => 'Gambar ID '. $id,
                 'aktivitas' => 'Mengedit',
                 'oleh' => Auth::user()->name,
-                'keterangan' => 'Nama Gambar : ' . $gambar . ' Nama Hash : ' . $hash . ' Display : ' . $request->display ,
+                'keterangan' => 'Nama Gambar : ' . $gambar->getClientOriginalName() . ' Nama Hash : ' . $hash . ' Display : ' . $request->display ,
                 'role' => Auth::user()->role
             ]);
         } else {

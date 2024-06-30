@@ -57,13 +57,13 @@
                                         <td class="border border-slate-600">
                                             <span><i class="bi bi-plus text-xl"></i></span>
                                         </td>
-                                        <td class="border border-slate-600">
+                                        <td class="border border-slate-600 px-2">
                                             <input type="datetime-local" wire:model="dibuat" name="dibuat" class="rounded-md @error('dibuat') is-invalid @enderror">
                                             @error('dibuat')
                                             {{$message}}
                                             @enderror
                                         </td>
-                                        <td class="border border-slate-600">
+                                        <td class="border border-slate-600 px-2">
                                             <label>
                                                 <input type="radio" wire:model="type" value="debet" />
                                                 Pemasukan
@@ -73,7 +73,7 @@
                                                 Pengeluaran
                                             </label>
                                         </td>
-                                        <td class="border border-slate-600">
+                                        <td class="border border-slate-600 px-2">
                                             @if($type == 'debet')
                                                 <input type="number" wire:model="debet" name="debet" class="rounded-md @error('debet') is-invalid @enderror" placeholder="Masukkan Debet">
                                                 @error('debet')
@@ -81,7 +81,7 @@
                                                 @enderror
                                             @endif
                                         </td>
-                                        <td class="border border-slate-600">
+                                        <td class="border border-slate-600 px-2">
                                             @if($type == 'kredit')
                                                 <input type="number" wire:model="kredit" name="kredit" class="rounded-md @error('kredit') is-invalid @enderror" placeholder="Masukkan Kredit">
                                                 @error('kredit')
@@ -91,7 +91,7 @@
                                         </td>
                                         <td class="border border-slate-600">
                                         </td>
-                                        <td class="border border-slate-600">
+                                        <td class="border border-slate-600 px-2">
                                             <input type="text" wire:model="keterangan" name="keterangan" class="rounded-md @error('keterangan') is-invalid @enderror" placeholder="Masukkan Keterangan">
                                             @error('keterangan')
                                             {{$message}}
@@ -109,7 +109,7 @@
                                 @foreach ($data_keuangan as $index => $item)
                                 <tr class="text-center">
                                     <td class="border border-slate-600"><span class="p-4">{{$loop->iteration}}</span></td>
-                                    <td class="border border-slate-600">
+                                    <td class="border border-slate-600 px-2">
                                         @if($update && $item->id == $updateId)
                                         <input type="datetime-local" wire:model="dibuat" name="dibuat" class="rounded-md @error('dibuat') is-invalid @enderror">
                                         @error('dibuat')
@@ -144,7 +144,7 @@
                                         <span class="p-4">{{$weekday}}, {{ $item->created_at->format('d-m-Y') }}</span>
                                         @endif
                                     </td>
-                                    <td class="border border-slate-600">
+                                    <td class="border border-slate-600 px-2">
                                         @if($update && $item->id == $updateId)
                                             <label>
                                                 <input type="radio" wire:model="type" value="debet" />
@@ -164,7 +164,7 @@
                                         </span>
                                         @endif
                                     </td>
-                                    <td class="border border-slate-600">
+                                    <td class="border border-slate-600 px-2">
                                         @if($update && $item->id == $updateId)
                                             @if($type == 'debet')
                                                 <input type="number" wire:model="debet" name="debet" class="rounded-md @error('debet') is-invalid @enderror" placeholder="Masukkan Debet">
@@ -178,7 +178,7 @@
                                             @endif
                                         @endif
                                     </td>
-                                    <td class="border border-slate-600">
+                                    <td class="border border-slate-600 px-2">
                                         @if($update && $item->id == $updateId)
                                             @if($type == 'kredit')
                                                 <input type="number" wire:model="kredit" name="kredit" class="rounded-md @error('kredit') is-invalid @enderror" placeholder="Masukkan Kredit">
@@ -195,7 +195,7 @@
                                     <td class="border border-slate-600">
                                         <span class="p-4">Rp. {{number_format($data_saldo[$index],0,',','.')}}</span>
                                     </td>
-                                    <td class="border border-slate-600">
+                                    <td class="border border-slate-600 px-2">
                                         @if($update && $item->id == $updateId)
                                             <input type="text" wire:model="keterangan" name="keterangan" class="rounded-md @error('keterangan') is-invalid @enderror" placeholder="Masukkan Keterangan">
                                             @error('keterangan')

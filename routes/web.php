@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/dashboard/gambar/edit/{id}', [AdminController::class, 'editGambar'])->name('gambar.edit');
     Route::post('/dashboard/gambar/edit/{id}', [AdminController::class, 'store'])->name('gambar.store');
     Route::get('/dashboard/gambar/edit/display/{id}', [AdminController::class, 'editDisplay'])->name('gambar.editDisplay');
+    Route::get('/dashboard/history', [AdminController::class, 'history'])->name('history');
 });
 Route::middleware(['super_admin'])->group(function() {
     Route::get('/text', function() {

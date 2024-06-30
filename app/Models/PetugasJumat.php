@@ -13,6 +13,9 @@ class PetugasJumat extends Model
         'khotib',
         'imam',
         'muadzin',
-        'bilal'
+        'bilal',
+        'display',
+        'created_at',
+        'updated_at'
     ];
 }

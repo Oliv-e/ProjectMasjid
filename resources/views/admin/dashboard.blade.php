@@ -42,6 +42,14 @@
                     </div>
                 </div>
             </div>
+            <div class="max-w-7xl w-full mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="flex justify-between items-center p-6 text-gray-900">
+                        <span>Aktivitas Saya</span>
+                        <a href="{{route('history')}}" class="p-2 px-4 bg-slate-900 hover:bg-slate-700 text-white border rounded-lg">Lihat</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="block sm:hidden">
@@ -61,6 +69,10 @@
             <div class="bg-white flex justify-between items-center p-6 text-gray-900">
                 <span> Latar Belakang</span>
                 <a href="{{route('gambar')}}" class="p-2 px-4 bg-slate-900 hover:bg-slate-700 text-white border rounded-lg">Lihat</a>
+            </div>
+            <div class="bg-white flex justify-between items-center p-6 text-gray-900">
+                <span> Aktivitas Saya</span>
+                <a href="{{route('history')}}" class="p-2 px-4 bg-slate-900 hover:bg-slate-700 text-white border rounded-lg">Lihat</a>
             </div>
         </div>
     </div>    

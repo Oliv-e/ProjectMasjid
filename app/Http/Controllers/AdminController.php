@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gambar;
+use App\Models\Log_History;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -46,6 +48,13 @@ class AdminController extends Controller
                 'gambar' => $hash,
                 'display' => $request->display,
             ]);
+            Log_History::create([
+                'bagian' => 'Gambar ID '. $id,
+                'aktivitas' => 'Mengedit',
+                'oleh' => Auth::user()->name,
+                'keterangan' => 'Nama Gambar : ' . $gambar . ' Nama Hash : ' . $hash . ' Display : ' . $request->display ,
+                'role' => Auth::user()->role
+            ]);
         } else {
             Gambar::whereId($id)->update([
                 'display' => $request->display,
@@ -70,7 +79,29 @@ class AdminController extends Controller
         Gambar::whereId($id)->update([
             'display' => $display,
         ]);
+        Log_History::create([
+            'bagian' => 'Gambar ID '. $id,
+            'aktivitas' => 'Mengedit',
+            'oleh' => Auth::user()->name,
+            'keterangan' => 'Display : ' . $display ,
+            'role' => Auth::user()->role
+        ]);
 
         return redirect()->route('gambar')->with('success','Tampilan Berhasil di Update');
+    }
+
+    public function history() {
+        $role = Auth::user()->role;
+        if ($role == 'moderator') {
+            $data = Log_History::where('oleh', Auth::user()->name)->orderBy('id', 'desc')->get();
+        }
+        if ($role == 'admin') {
+            $data = Log_History::whereIn('role', ['admin', 'moderator'])->orderBy('id', 'desc')->get();
+        }
+        if ($role == 'super_admin') {
+            $data = Log_History::orderBy('id', 'desc')->get();
+        }
+
+        return view('admin.history.home', compact('data'));
     }
 }

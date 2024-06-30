@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('muadzin')->nullable();
             $table->string('bilal')->nullable();
             $table->enum('display',['true','false']);
-            $table->timestamps();
+            $table->date('created_at');
+            $table->date('updated_at');
         });
     }
 

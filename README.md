@@ -26,8 +26,10 @@ Fitur
    - Melihat Landing Page Yang Memuat Informasi Countdown Waktu Sekarang s.d. Waktu Sholat Berikutnya, Jam, Pengumuman, Petugas Hari Jumat, dan Alur Keuangan
 2. Admin
    - Melihat Dashboard, Manajemen Pengumuman, Keuangan dan Petugas Jumat
+3. Admin 2
+   - Melihat Dashboard, Manajemen Pengumuman, Keuangan, Petugas Jumat, Mengelola Akun dan Melihat Log Histori
 3. Super Admin
-   - Melihat Dashboard, Log Admin, Manajemen Pengumuman, Keuangan, Petugas Jumat, Recovery Data Terhapus
+   - Melihat Dashboard, Manajemen Pengumuman, Keuangan, Petugas Jumat, Mengelola Akun, Manajemen Log Histori dan Recovery Data Terhapus
 --------------------------------------------------------
 Revisi
 --------------------------------------------------------
@@ -38,7 +40,7 @@ Revisi
 --------------------------------------------------------
 Bugs
 --------------------------------------------------------
-- symlink di prod
+- Tidak ada bug ditemukan
 --------------------------------------------------------
 Testing
 --------------------------------------------------------
@@ -47,9 +49,11 @@ Testing
 To Do List
 --------------------------------------------------------
 - Implementasi Sweetalert ke DataTable
-- Menambah History di Pengurus Jumat
+- Menambah History (Done)
 - Membuat SuperAdmin
--- Membuat Log User
+-- Membuat Log User (Done)
 -- Membuat Data Table Recovery Data
 - Membuat Tata Letak Landing Page
 - Paginasi data
+- Manajemen Role
+- Membuat Data Tabel untuk akun

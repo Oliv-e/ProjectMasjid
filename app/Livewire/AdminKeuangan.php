@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class AdminKeuangan extends Component
@@ -70,13 +71,20 @@ class AdminKeuangan extends Component
             } else if ($this->type == 'kredit') {
                 $this->debet = null;
             }
-            \App\Models\Keuangan::create([
+            $kc = \App\Models\Keuangan::create([
                 'debet' => $this->debet,
                 'kredit' => $this->kredit,
                 'keterangan' => $this->keterangan,
                 'diarsipkan' => 'false',
                 'created_at' => $this->dibuat,
                 'updated_at' => $this->dibuat,
+            ]);
+            \App\Models\Log_History::create([
+                'bagian' => 'keuangan ID '. $kc->id,
+                'aktivitas' => 'Membuat',
+                'oleh' => Auth::user()->name,
+                'keterangan' => 'Debet : '. $kc->debet .', Kredit : '. $kc->kredit .', Keterangan : '. $kc->keterangan,
+                'role' => Auth::user()->role
             ]);
             session()->flash('success','Data Keuangan Berhasil Ditambah!');
             $this->resetFields();
@@ -128,6 +136,13 @@ class AdminKeuangan extends Component
                 'diarsipkan' => 'false',
                 'created_at' => $this->dibuat,
             ]);
+            \App\Models\Log_History::create([
+                'bagian' => 'keuangan ID '. $id,
+                'aktivitas' => 'Mengedit',
+                'oleh' => Auth::user()->name,
+                'keterangan' => 'Debet : '. $this->debet .', Kredit : '. $this->kredit .', Keterangan : '. $this->keterangan,
+                'role' => Auth::user()->role
+            ]);
             session()->flash('success','Data keuangan Berhasil Diupdate!');
             $this->resetFields();
             $this->update = false;
@@ -139,7 +154,15 @@ class AdminKeuangan extends Component
     }
     public function delete($id) {
         try {
+            $kd = \App\Models\keuangan::find($id);
             \App\Models\Keuangan::find($id)->update(['diarsipkan' => 'true']);
+            \App\Models\Log_History::create([
+                'bagian' => 'keuangan ID '. $id,
+                'aktivitas' => 'Menghapus',
+                'oleh' => Auth::user()->name,
+                'keterangan' => 'Debet : '. $kd->debet .', Kredit : '. $kd->kredit .', Keterangan : '. $kd->keterangan,
+                'role' => Auth::user()->role
+            ]);
             session()->flash('success','Data Berhasil Dihapus!');
             $this->resetFields();
             $this->mount();

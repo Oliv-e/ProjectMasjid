@@ -48,6 +48,37 @@
                                 </tr>
                             </thead>
                             <tbody wire:poll>
+                                @if($create == true)
+                                <form>
+                                    <tr class="text-center">
+                                        <td class="border border-slate-600">
+                                            <span><i class="bi bi-plus text-xl p-4"></i></span>
+                                        </td>
+                                        <td class="border border-slate-600 px-2">
+                                            <input type="text" wire:model="content" name="content" class="w-full rounded-md @error('content') is-invalid @enderror" placeholder="Masukkan Pengumuman">
+                                            @error('content')
+                                            {{$message}}
+                                            @enderror
+                                        </td>
+                                        <td class="border border-slate-600">
+                                            <select name="display" wire:model="display" class="rounded-md">
+                                                <option value="" hidden></option>
+                                                <option value="true">Ya</option>
+                                                <option value="false">Tidak</option>
+                                            </select>
+                                        </td>
+                                        {{-- <td class="border border-slate-600"><span class="p-4"></span></td>
+                                        <td class="border border-slate-600"><span class="p-4"></span></td>
+                                        <td class="border border-slate-600"><span class="p-4">{{Auth::user()->name}}</span></td> --}}
+                                        <td class="border border-slate-600 text-2xl mx-auto">
+                                            <div class="p-4 flex gap-2 justify-center">
+                                                <a wire:click.prevent="store()"><i class="bi bi-floppy hover:text-green-500"></i></a>
+                                                <a wire:click.prevent="cancel()"><i class="bi bi-x hover:text-red-500 hover:bg-red-200 bg-red-700 px-1 my-1 rounded-md text-white"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </form>
+                                @endif
                                 @foreach ($pengumuman as $item)
                                 <tr class="text-center">
                                     <td class="border border-slate-600"><span class="p-4">{{$loop->iteration}}</span></td>
@@ -88,37 +119,6 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                                @if($create == true)
-                                <form>
-                                    <tr class="text-center">
-                                        <td class="border border-slate-600">
-                                            <span><i class="bi bi-plus text-xl p-4"></i></span>
-                                        </td>
-                                        <td class="border border-slate-600 px-2">
-                                            <input type="text" wire:model="content" name="content" class="w-full rounded-md @error('content') is-invalid @enderror" placeholder="Masukkan Pengumuman">
-                                            @error('content')
-                                            {{$message}}
-                                            @enderror
-                                        </td>
-                                        <td class="border border-slate-600">
-                                            <select name="display" wire:model="display" class="rounded-md">
-                                                <option value="" hidden></option>
-                                                <option value="true">Ya</option>
-                                                <option value="false">Tidak</option>
-                                            </select>
-                                        </td>
-                                        {{-- <td class="border border-slate-600"><span class="p-4"></span></td>
-                                        <td class="border border-slate-600"><span class="p-4"></span></td>
-                                        <td class="border border-slate-600"><span class="p-4">{{Auth::user()->name}}</span></td> --}}
-                                        <td class="border border-slate-600 text-2xl mx-auto">
-                                            <div class="p-4 flex gap-2 justify-center">
-                                                <a wire:click.prevent="store()"><i class="bi bi-floppy hover:text-green-500"></i></a>
-                                                <a wire:click.prevent="cancel()"><i class="bi bi-x hover:text-red-500 hover:bg-red-200 bg-red-700 px-1 my-1 rounded-md text-white"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </form>
-                                @endif
                             </tbody>
                         </table>
                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class AdminPengumuman extends Component
@@ -35,10 +36,17 @@ class AdminPengumuman extends Component
             if ($this->display == 'true') {
                 \App\Models\Pengumuman::where('display', 'true')->update(['display' => 'false']);
             }
-            \App\Models\Pengumuman::create([
+            $pc = \App\Models\Pengumuman::create([
                 'content' => $this->content,
                 'display' => $this->display,
                 'diarsipkan' => 'false'
+            ]);
+            \App\Models\Log_History::create([
+                'bagian' => 'Pengumuman ID '. $pc->id,
+                'aktivitas' => 'Membuat',
+                'oleh' => Auth::user()->name,
+                'keterangan' => 'Content : '. $this->content .', Display : '. $this->display,
+                'role' => Auth::user()->role
             ]);
             session()->flash('success','Pengumuman Berhasil Dibuat!');
             $this->resetFields();
@@ -67,6 +75,13 @@ class AdminPengumuman extends Component
                 'content' => $this->content,
                 'display' => $this->display,
             ]);
+            \App\Models\Log_History::create([
+                'bagian' => 'Pengumuman ID '. $id,
+                'aktivitas' => 'Mengedit',
+                'oleh' => Auth::user()->name,
+                'keterangan' => 'Content : '. $this->content .', Display : '. $this->display,
+                'role' => Auth::user()->role
+            ]);
             session()->flash('success','Pengumuman Berhasil Diupdate!');
             $this->resetFields();
             $this->update = false;
@@ -78,7 +93,15 @@ class AdminPengumuman extends Component
     }
     public function delete($id) {
         try {
+            $pd = \App\Models\Pengumuman::find($id);
             \App\Models\Pengumuman::find($id)->update(['display' => 'false','diarsipkan' => 'true']);
+            \App\Models\Log_History::create([
+                'bagian' => 'Pengumuman ID '. $id,
+                'aktivitas' => 'Menghapus',
+                'oleh' => Auth::user()->name,
+                'keterangan' => 'Content : '. $pd->content .', Display : '. $pd->display,
+                'role' => Auth::user()->role
+            ]);
             session()->flash('success','Pengumuman Berhasil Dihapus!');
             $this->resetFields();
             $this->refreshData();

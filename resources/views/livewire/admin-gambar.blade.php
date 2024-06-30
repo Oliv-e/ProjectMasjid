@@ -9,7 +9,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="p-2 bg-slate-300 mb-2 rounded-md">
-                        Maksimal Hanya Menampilkan 3 Latar Belakang, Perubahan Otomatis dilakukan dalam 1 Jam.
+                        Maksimal Hanya Menampilkan 3 Latar Belakang, Perubahan Otomatis dilakukan dalam 5 Menit. Jika Gambar Kosong / Tidak Tampil Silahkan Menambahkan Gambar Melalui Fitur Edit
                     </div>
                     @if(session()->has('success'))
                         <div>

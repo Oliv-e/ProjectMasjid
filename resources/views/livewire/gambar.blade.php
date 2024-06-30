@@ -1,10 +1,20 @@
 <div wire:poll.300s id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        @foreach($data_gambar as $item)
+        @php $hasData = isset($data_gambar) && count($data_gambar->name) > 0; @endphp
+        @if($hasData)
+            @foreach($data_gambar as $item)
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <img src="{{asset('storage/'.$item->gambar)}}" class="d-block w-100">
+                </div>
+            @endforeach
+        @else
             <div class="carousel-item active" data-bs-interval="5000">
-                <img src="{{asset('storage/'.$item->gambar)}}" class="d-block w-100">
+                <img src="{{asset('gambar/masjid.jpeg')}}" class="d-block w-100">
             </div>
-        @endforeach
+            <div class="carousel-item active" data-bs-interval="5000">
+                <img src="{{asset('gambar/masjid2.jpg')}}" class="d-block w-100">
+            </div>
+        @endif
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
         <span class="carousel-control-prev-icon d-none" aria-hidden="true"></span>

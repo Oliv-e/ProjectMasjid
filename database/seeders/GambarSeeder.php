@@ -16,21 +16,21 @@ class GambarSeeder extends Seeder
     {
         DB::table('gambar')->insert([
             [
-                'gambar' => 'Gambar1.png',
+                'gambar' => '',
                 'display' => 'true',
                 'diarsipkan' => 'false',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
-                'gambar' => 'Gambar2.png',
+                'gambar' => '',
                 'display' => 'false',
                 'diarsipkan' => 'false',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ],
             [
-                'gambar' => 'Gambar3.png',
+                'gambar' => '',
                 'display' => 'false',
                 'diarsipkan' => 'false',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid fs-1 d-flex p-4 justify-content-between align-content-center m-0" style="align-items: center; background-color: rgba(0, 0, 0, 0.7);">
         <div class="text-white d-flex gap-2 align-items-center fs-1">
-            <img src="{{ asset('img/vector.svg')}}" class="img-fluid p-2" alt="">
+            <img src="{{ asset('gambar/logo.svg')}}" class="img-fluid p-2" alt="">
             <p style="font-size: 23px; font-weight: 500; margin: 0;">Masjid Al-Ikhlas</p>
 
         </div>

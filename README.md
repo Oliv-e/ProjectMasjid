@@ -50,10 +50,10 @@ To Do List
 --------------------------------------------------------
 - Implementasi Sweetalert ke DataTable
 - Menambah History (Done)
-- Membuat SuperAdmin
+- Membuat SuperAdmin (Done)
 -- Membuat Log User (Done)
--- Membuat Data Table Recovery Data
+-- Membuat Data Table Recovery Data/
 - Membuat Tata Letak Landing Page
 - Paginasi data
-- Manajemen Role
-- Membuat Data Tabel untuk akun
+- Membuat Data Tabel untuk akun (Done)
+- Responsive Aktivitas, Recovery Data & Manajemen Akun

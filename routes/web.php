@@ -26,9 +26,15 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/dashboard/gambar/edit/display/{id}', [AdminController::class, 'editDisplay'])->name('gambar.editDisplay');
     Route::get('/dashboard/history', [AdminController::class, 'history'])->name('history');
 });
+Route::middleware(['is_admin_super_admin'])->group(function () {
+    Route::get('/dashboard/manage-user', [AdminController::class, 'manage_user'])->name('manage_user');
+    Route::get('/dashboard/manage-user/create', [AdminController::class, 'create_user'])->name('manage_user.create');
+    Route::POST('/dashboard/manage-user/create', [AdminController::class, 'store_user'])->name('manage_user.store');
+    Route::get('/dashboard/manage-user/edit/{id}', [AdminController::class, 'edit_user'])->name('manage_user.edit');
+    Route::POST('/dashboard/manage-user/edit/{id}', [AdminController::class, 'update_user'])->name('manage_user.update');
+    Route::get('/dashboard/manage-user/hapus/{id}', [AdminController::class, 'delete_user'])->name('manage_user.delete');
+});
 Route::middleware(['super_admin'])->group(function() {
-    Route::get('/text', function() {
-        return view('page.home.home');
-    });
+    Route::get('/dashboard/recovery', [AdminController::class, 'recovery'])->name('recovery');
 });
 require __DIR__.'/auth.php';

@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Gambar;
 use App\Models\Log_History;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -102,6 +105,84 @@ class AdminController extends Controller
             $data = Log_History::orderBy('id', 'desc')->get();
         }
 
-        return view('admin.history.home', compact('data'));
+        return view('admin.History.home', compact('data'));
+    }
+    public function manage_user()  {
+        if (Auth::user()->role == 'admin') {
+            $data = User::whereIn('role', ['admin', 'moderator'])->get();
+        } else if (Auth::user()->role = 'super_admin') {
+            $data = User::all();
+        }
+        return view('admin.Akun.home', compact('data'));
+    }
+    public function create_user()  {
+        return view('admin.Akun.create');
+    }
+    public function store_user(Request $request) {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+            'password_confirmation' => 'required|min:8',
+        ]);
+        if ($request->password != $request->password_confirmation) {
+            return redirect()->route('manage_user.create')->with('error', 'Password Tidak Sama');
+        }
+        $uid = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
+        if ($request->role) {
+            $uid->update([
+                'role' => $request->role,
+            ]);
+        }
+        if ($request->eva) {
+            $uid->update([
+                'email_verified_at' => $request->eva
+            ]);
+        }
+        return redirect()->route('manage_user')->with('success', 'Akun Berhasil Dibuat!');
+    }
+    public function edit_user($id)  {
+        $data = User::where('id', $id)->first();
+        return view('admin.Akun.edit', compact('data'));
+    }
+    public function update_user($id, Request $request)  {
+        $data = User::findOrFail($id);
+        $this->validate($request,[
+            'name' => 'required',
+            'email' => ['required','email',Rule::unique('users')->ignore($data->id)]
+        ]);
+        $data->update([
+            'name' => $request->name,
+        ]);
+        if ($request->password) {
+            $data->update([
+                'password' => Hash::make($request->password)
+            ]); 
+        }
+        if ($request->email != $data->email) {
+            $data->update([
+                'email' => $request->email,
+                'email_verified_at' => null
+            ]);
+        }
+        if ($request->role) {
+            $data->update([ 'role' => $request->role ]);
+        }
+        if ($request->eva) {
+            $data->update([ 'email_verified_at' => $request->eva ]);
+        }
+        return redirect()->route('manage_user')->with('success', 'Data Berhasil di Perbaharui');
+    }
+    public function delete_user($id)  {
+        $data = User::findOrFail($id);
+        $data->delete();
+        return redirect()->route('manage_user')->with('success', 'Akun Berhasil di Hapus');
+    }
+    public function recovery() {
+        return view('admin.Recovery.home');
     }
 }

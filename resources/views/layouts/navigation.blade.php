@@ -32,6 +32,11 @@
                     <x-nav-link :href="route('history')" :active="request()->routeIs('history')">
                         {{ __('Aktivitas') }}
                     </x-nav-link>
+                    @if (Auth::check() && (Auth::user()->role == 'admin') || (Auth::user()->role == 'super_admin'))
+                    <x-nav-link :href="route('manage_user')" :active="request()->routeIs('manage_user')">
+                        {{ __('Manajemen Akun') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -54,6 +59,16 @@
                         <x-dropdown-link :href="route('history')">
                                 {{ __('Aktivitas Saya') }}
                         </x-dropdown-link>
+                        @if (Auth::check() && (Auth::user()->role == 'admin') || (Auth::user()->role == 'super_admin'))
+                            <x-dropdown-link :href="route('manage_user')">
+                                {{ __('Manajemen Akun') }}
+                            </x-dropdown-link>
+                        @endif
+                        @if (Auth::check() && (Auth::user()->role == 'super_admin'))
+                            <x-dropdown-link :href="route('recovery')">
+                                {{ __('Recovery Data') }}
+                            </x-dropdown-link>
+                        @endif
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -101,6 +116,11 @@
             <x-responsive-nav-link :href="route('history')" :active="request()->routeIs('history')">
                 {{ __('Aktivitas Saya') }}
             </x-responsive-nav-link>
+            @if (Auth::check() && (Auth::user()->role == 'admin') || (Auth::user()->role == 'super_admin'))
+                <x-responsive-nav-link :href="route('manage_user')" :active="request()->routeIs('manage_user')">
+                    {{ __('Manajemen Akun') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
@@ -114,6 +134,16 @@
                 <x-responsive-nav-link :href="route('history')">
                     {{ __('Aktivitas Saya') }}
                 </x-responsive-nav-link>
+                @if (Auth::check() && (Auth::user()->role == 'admin') || (Auth::user()->role == 'super_admin'))
+                    <x-responsive-nav-link :href="route('manage_user')">
+                        {{ __('Manajemen Akun') }}
+                    </x-responsive-nav-link>
+                @endif
+                @if (Auth::check() && (Auth::user()->role == 'admin') || (Auth::user()->role == 'super_admin'))
+                    <x-responsive-nav-link :href="route('recovery')">
+                        {{ __('Recovery Data') }}
+                    </x-responsive-nav-link>
+                @endif
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

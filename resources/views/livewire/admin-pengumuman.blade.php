@@ -112,7 +112,7 @@
                                                 <a wire:click.prevent="cancelEdit({{$item->id}})"><i class="bi bi-x hover:text-red-500 hover:bg-red-200 bg-red-700 px-1 my-1 rounded-md text-white"></i></a>
                                             @else
                                                 <a wire:click.prevent="edit({{$item->id}})"><i class="bi bi-pen hover:text-amber-500"></i></a>
-                                                <a wire:click.prevent="delete({{$item->id}})"><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>
+                                                <a wire:click="delete({{$item->id}})"><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>
                                                 <a wire:click.prevent="displays({{$item->id}})"><i class="bi bi-display-fill {{$item->display == 'true' ? 'text-green-500 hover:text-black' : 'text-black hover:text-green-500'}}"></i></a>
                                             @endif
                                         </div>

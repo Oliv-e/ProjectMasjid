@@ -13,6 +13,25 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            confirmDelete = function(button) {
+                var url = $(button).data('url');
+                swal({
+                    'title': 'Konfirmasi Hapus',
+                    'text': 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
+                    'dangermode': true,
+                    'buttons': true
+                }).then(function(value) {
+                    if (value) {
+                        window.location = url;
+                    }
+                })
+            }
+        </script>
         @livewireStyles
     </head>
     <body class="font-sans antialiased">

@@ -50,6 +50,16 @@
                     </div>
                 </div>
             </div>
+            @if (Auth::user()->role == 'admin' || Auth::user()->role == 'super_admin')
+            <div class="max-w-7xl w-full mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="flex justify-between items-center p-6 text-gray-900">
+                        <span>Manajemen Akun</span>
+                        <a href="{{route('manage_user')}}" class="p-2 px-4 bg-slate-900 hover:bg-slate-700 text-white border rounded-lg">Lihat</a>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
     <div class="block sm:hidden">
@@ -74,6 +84,12 @@
                 <span> Aktivitas Saya</span>
                 <a href="{{route('history')}}" class="p-2 px-4 bg-slate-900 hover:bg-slate-700 text-white border rounded-lg">Lihat</a>
             </div>
+            @if (Auth::user()->role == 'admin' || Auth::user()->role == 'super_admin')
+                <div class="bg-white flex justify-between items-center p-6 text-gray-900">
+                    <span> Manajemen Akun</span>
+                    <a href="{{route('manage_user')}}" class="p-2 px-4 bg-slate-900 hover:bg-slate-700 text-white border rounded-lg">Lihat</a>
+                </div>
+            @endif
         </div>
     </div>    
 </x-app-layout>

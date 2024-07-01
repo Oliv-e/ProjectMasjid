@@ -18,6 +18,7 @@ class Jadwal extends Component
         $jadwal = $response->json()['data']['jadwal'];
         unset($jadwal['tanggal']);
         unset($jadwal['date']);
+        unset($jadwal['terbit']);
         $this->data = $jadwal ;
     }
     

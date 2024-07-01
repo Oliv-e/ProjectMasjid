@@ -9,7 +9,17 @@
         @yield('css')
     </head>
     <body>
-        @yield('content')
+        <div class="res">
+            @yield('content')
+        </div>
+        <div class="ser d-flex flex-column align-items-center justify-content-center w-full" style="min-height: 100vh">
+            <span class="my-2">Please Open in PC</span>
+            @if (Auth::check())
+                <a href="{{route('dashboard')}}" class="text-black text-decoration-none px-4 py-2 border border-black rounded-2">Dashboard</a>
+            @else
+                <a href="{{route('login')}}" class="text-black text-decoration-none px-4 py-2 border border-black rounded-2">Login</a>
+            @endif
+        </div>
     </body>
     @include('page.components.scripts') {{-- global js--}}
     @yield('scripts')

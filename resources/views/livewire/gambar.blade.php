@@ -2,10 +2,7 @@
     <div class="carousel-inner">
         @foreach($data_gambar as $item)
             <div class="carousel-item active" data-bs-interval="5000">
-                <img src="{{asset('gambar/masjid.jpeg')}}" class="d-block w-100">
-            </div>
-            <div class="carousel-item active" data-bs-interval="5000">
-                <img src="{{asset('gambar/masjid2.jpg')}}" class="d-block w-100">
+                <img src="{{asset('storage/'.$item->gambar)}}" style="width:100vw; max-height:100vh; object-fit: cover;" alt="Display Gambar">
             </div>
         @endforeach
     </div>

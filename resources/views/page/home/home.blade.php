@@ -1,59 +1,49 @@
 @extends('page.layout.master')
 
 @section('content')
-    <div class="container-fluid fs-1 d-flex p-4 justify-content-between align-content-center m-0" style="align-items: center; background-color: rgba(0, 0, 0, 0.7);">
-        <div class="text-white d-flex gap-2 align-items-center fs-1">
-            <img src="{{ asset('gambar/logo.svg')}}" class="img-fluid p-2" alt="">
-            <p style="font-size: 23px; font-weight: 500; margin: 0;">Masjid Al-Ikhlas</p>
-
+    <div class="position-absolute z-n1">
+        @livewire('gambar')
+    </div>
+    <div class="d-flex p-4 justify-content-between">
+        <div class="w-25 d-flex fs-1 align-items-center gap-2 rounded-4 border-white border" style="background-color: rgba(0,0,0,0.7)">
+            <img src="{{ asset('gambar/logo.svg')}}" class="img-fluid p-2" width="100px" alt="Masjid Icon">
+            <span class="fs-2 text-white">Masjid Nurul Huda</span>
         </div>
-        <div class="d-flex align-items-center">
-            @livewire('countdown')
-        </div>
-        <div class="d-flex fs-1">
-            <div class="d-none d-sm-flex text-white" style="font-size: 25px;">
+        <div class="w-25 text-white border-white border rounded-4" style="background-color: rgba(0,0,0,0.7)">
+            <div class="fs-1 text-center">
                 <span id="hrs">00</span> : <span id="min">00</span> : <span id="sec">00</span>
             </div>
-            <div class="d-flex d-sm-none">
-                @if (Route::has('login'))
-                    @auth
-                        <a class="login" href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
-                    @else
-                        <a class="login" href="{{route('login')}}">masuk</a>
-                        <a class="login" href="{{route('register')}}">register</a>
-                    @endauth
-                @endif
+            <div>
+                <span>@livewire('countdown')</span>
             </div>
         </div>
     </div>
-
-    <main class="overflow-hidden">
-        @livewire('gambar')
-    
-        <div style="position: fixed; top: 25%; left: 10%; tranform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.7);; color: white; padding: 10px, border-radius: 18px; max-width: 100%; width: 80%;">
-            <div style="display: flex; justify-content: space-evenly; align-items: center; padding: 0;">
-                @livewire('jadwal')
-            </div>
-        </div>
-    </main>
-
-
-    <div class="container" style="position: fixed; top: 55%; left: 15%; tranform: translate(-50%, -50%); background-color: white; color: rgb(0, 0, 0); padding: 10px, border-radius: 18px; max-width: 80%; width: 70%;">
-        {{-- <div class="row bg-success py-4">
-            <div class="col-4 p-2 text-center bg-primary">
+    <div class="d-flex justify-content-between px-4">
+        @if (\Carbon\Carbon::now()->isFriday())
+            <div class="w-25">
                 @livewire('petugas-jumat')
             </div>
-            <div class="col-4 p-2 text-center bg-warning">
+        @endif
+        <?php $tampilkan = true ?>
+        @if ($tampilkan)
+            <div class="w-50">
                 @livewire('keuangan')
             </div>
-            <div class="col-4 p-2 text-center bg-secondary">
-                @livewire('gambar')
-            </div>
-        </div> --}}
+        @endif
+        <div class="w-25">
+            @livewire('jadwal')
+        </div>
     </div>
-
-    <div class="container-fluid p-2 fs-1 bg-primary text-white d-flex w-full" style="position: fixed; inset-inline-end: 0; inset-inline-start: 0; z-index: 100; bottom: 0;">
-        @livewire('pengumuman')
+    <div class="fs-1 d-flex">
+        <div class="w-75 p-4">
+            @livewire('pengumuman')
+        </div>
+        <div class="w-25 p-4">
+            <div class="border border-white rounded-4 w-full text-white p-4 text-center" style="background-color: rgba(0, 0, 0, 0.7)">
+                <span>{{now()->format('d-m-Y')}}</span>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('scripts')
     <script>
@@ -67,6 +57,10 @@
             hrs.innerHTML = String(currentTime.getHours()).padStart(2, '0');
             min.innerHTML = String(currentTime.getMinutes()).padStart(2, '0');
             sec.innerHTML = String(currentTime.getSeconds()).padStart(2, '0');
+
+            if (currentTime.getHours() === 23 && currentTime.getMinutes() === 59 && currentTime.getSeconds() === 59) {
+                location.reload();
+            }
         }, 1000);
     </script>
 @endsection

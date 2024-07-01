@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/s', function () {
-    return view('page.home');
-});
 Route::get('/', [AdminController::class, 'home'])->name('home');
 Route::middleware(['auth'])->group(function() {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');

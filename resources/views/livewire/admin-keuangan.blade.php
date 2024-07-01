@@ -1,5 +1,5 @@
 <div wire:poll>
-    <div class="py-12 flex flex-col w-full gap-2">
+    <div class="pt-12 pb-6 flex flex-col w-full gap-2">
         <div class="md:flex max-w-7xl w-full hidden justify-between mx-auto sm:px-6 lg:px-8">
             <a onclick="history.back()"><i class="me-4 bi bi-arrow-left rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2"></i> Kembali</a>
             <a wire:click="new()">Tambah Data Keuangan <i class="ms-4 bi bi-plus rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2"></i></a>
@@ -7,6 +7,21 @@
         <div class="md:hidden max-w-7xl w-[90%] flex justify-between mx-auto sm:px-6 lg:px-8">
             <a onclick="history.back()"><i class="me-2 bi bi-arrow-left rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2 ml-2"></i></a>
             <a wire:click="new()">Data Baru <i class="ms-2 bi bi-plus rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2 mr-2"></i></a>
+        </div>
+    </div>
+    <div class="pb-4 flex flex-row justify-between w-full gap-2">
+        <div class="md:flex max-w-7xl w-full hidden gap-2 mx-auto sm:px-6 lg:px-8">
+            <select wire:model="month" wire:change="search" class="rounded-md">
+                <option hidden selected>{{now()->format('m')}}</option>
+                @foreach(range(1, 12) as $month)
+                    <option value="{{ $month }}">{{ $month }}</option>
+                @endforeach
+            </select>
+            <select wire:model="year" wire:change="search" class="rounded-md">
+                @foreach(range(date('Y'), 2020) as $year)
+                    <option value="{{ $year }}">{{ $year }}</option>
+                @endforeach
+            </select>
         </div>
     </div>
     
@@ -24,19 +39,6 @@
                             {{ session()->get('error') }}
                         </div>
                     @endif
-                    <div class="max-w-4xl mx-auto">
-                        <select wire:model="month" wire:change="search" class="rounded-md">
-                            <option hidden selected>{{now()->format('m')}}</option>
-                            @foreach(range(1, 12) as $month)
-                                <option value="{{ $month }}">{{ $month }}</option>
-                            @endforeach
-                        </select>
-                        <select wire:model="year" wire:change="search" class="rounded-md">
-                            @foreach(range(date('Y'), 2020) as $year)
-                                <option value="{{ $year }}">{{ $year }}</option>
-                            @endforeach
-                        </select>
-                    </div>
                     <div>
                         <table class="mt-2 mx-auto table-auto border-collapse border border-slate-500">
                             <thead>

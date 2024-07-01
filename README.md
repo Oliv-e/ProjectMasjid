@@ -48,12 +48,12 @@ Testing
 --------------------------------------------------------
 To Do List
 --------------------------------------------------------
-- Implementasi Sweetalert ke DataTable
+- Implementasi Sweetalert ke DataTable (Done)
 - Menambah History (Done)
 - Membuat SuperAdmin (Done)
--- Membuat Log User (Done)
--- Membuat Data Table Recovery Data/
-- Membuat Tata Letak Landing Page
-- Paginasi data
+- Membuat Log User (Done)
 - Membuat Data Tabel untuk akun (Done)
-- Responsive Aktivitas, Recovery Data & Manajemen Akun
+- Responsive Aktivitas & Manajemen Akun (done)
+
+- Membuat Tata Letak Landing Page
+- Paginasi data (Done)

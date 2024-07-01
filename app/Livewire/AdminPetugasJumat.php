@@ -69,7 +69,7 @@ class AdminPetugasJumat extends Component
                 'bagian' => 'Petugas Jumat ID '. $pjc->id,
                 'aktivitas' => 'Membuat',
                 'oleh' => Auth::user()->name,
-                'keterangan' => ' Khotib : '. $pjc->khotib .' Imam : '. $pjc->imam .' Muadzin : '. $pjc->muadzin .' Bilal : '. $pjc->bilal . ' Tanggal : ' , $pjc->created_at ,
+                'keterangan' => ' Khotib : '. $pjc->khotib .' Imam : '. $pjc->imam .' Muadzin : '. $pjc->muadzin .' Bilal : '. $pjc->bilal . ' Tanggal : ' . $pjc->created_at ,
                 'role' => Auth::user()->role
             ]);
             session()->flash('success','Data Petugas Berhasil Dibuat!');
@@ -116,7 +116,7 @@ class AdminPetugasJumat extends Component
                 'bagian' => 'Petugas Jumat ID '. $id,
                 'aktivitas' => 'Mengedit',
                 'oleh' => Auth::user()->name,
-                'keterangan' => ' Khotib : '. $this->khotib .' Imam : '. $this->imam .' Muadzin : '. $this->muadzin .' Bilal : '. $this->bilal . 'Tanggal : ' , now()->format('Y-m-d') ,
+                'keterangan' => ' Khotib : '. $this->khotib .' Imam : '. $this->imam .' Muadzin : '. $this->muadzin .' Bilal : '. $this->bilal . ' Tanggal : ' . now()->format('Y-m-d') ,
                 'role' => Auth::user()->role
             ]);
             session()->flash('success','Data Petugas Berhasil Diupdate!');
@@ -137,7 +137,7 @@ class AdminPetugasJumat extends Component
                 'bagian' => 'Petugas Jumat ID '. $pjd->id,
                 'aktivitas' => 'Menghapus',
                 'oleh' => Auth::user()->name,
-                'keterangan' => 'Khotib : '. $pjd->khotib .' Imam : '. $pjd->imam .' Muadzin : '. $pjd->muadzin .' Bilal : '. $pjd->bilal . 'Tanggal : ' , now()->format('Y-m-d') ,
+                'keterangan' => 'Khotib : '. $pjd->khotib .' Imam : '. $pjd->imam .' Muadzin : '. $pjd->muadzin .' Bilal : '. $pjd->bilal . ' Tanggal : ' . now()->format('Y-m-d') ,
                 'role' => Auth::user()->role
             ]);
             \App\Models\PetugasJumat::find($id)->delete();

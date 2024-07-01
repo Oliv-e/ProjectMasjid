@@ -34,7 +34,4 @@ Route::middleware(['is_admin_super_admin'])->group(function () {
     Route::POST('/dashboard/manage-user/edit/{id}', [AdminController::class, 'update_user'])->name('manage_user.update');
     Route::get('/dashboard/manage-user/hapus/{id}', [AdminController::class, 'delete_user'])->name('manage_user.delete');
 });
-Route::middleware(['super_admin'])->group(function() {
-    Route::get('/dashboard/recovery', [AdminController::class, 'recovery'])->name('recovery');
-});
 require __DIR__.'/auth.php';

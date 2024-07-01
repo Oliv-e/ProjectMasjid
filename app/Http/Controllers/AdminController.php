@@ -96,13 +96,13 @@ class AdminController extends Controller
     public function history() {
         $role = Auth::user()->role;
         if ($role == 'moderator') {
-            $data = Log_History::where('oleh', Auth::user()->name)->orderBy('id', 'desc')->get();
+            $data = Log_History::where('oleh', Auth::user()->name)->orderBy('id', 'desc')->paginate(15);
         }
         if ($role == 'admin') {
-            $data = Log_History::whereIn('role', ['admin', 'moderator'])->orderBy('id', 'desc')->get();
+            $data = Log_History::whereIn('role', ['admin', 'moderator'])->orderBy('id', 'desc')->paginate(15);
         }
         if ($role == 'super_admin') {
-            $data = Log_History::orderBy('id', 'desc')->get();
+            $data = Log_History::orderBy('id', 'desc')->paginate(15);
         }
 
         return view('admin.History.home', compact('data'));

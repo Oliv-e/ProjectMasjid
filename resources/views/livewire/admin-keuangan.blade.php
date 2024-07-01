@@ -26,6 +26,7 @@
                     @endif
                     <div class="max-w-4xl mx-auto">
                         <select wire:model="month" wire:change="search" class="rounded-md">
+                            <option hidden selected>{{now()->format('m')}}</option>
                             @foreach(range(1, 12) as $month)
                                 <option value="{{ $month }}">{{ $month }}</option>
                             @endforeach
@@ -75,7 +76,7 @@
                                         </td>
                                         <td class="border border-slate-600 px-2">
                                             @if($type == 'debet')
-                                                <input type="number" wire:model="debet" name="debet" class="rounded-md @error('debet') is-invalid @enderror" placeholder="Masukkan Debet">
+                                                <input type="number" wire:model="debet" name="debet" class="rounded-md @error('debet') is-invalid @enderror" placeholder="Jumlah Masuk (Rp)">
                                                 @error('debet')
                                                 {{$message}}
                                                 @enderror
@@ -83,7 +84,7 @@
                                         </td>
                                         <td class="border border-slate-600 px-2">
                                             @if($type == 'kredit')
-                                                <input type="number" wire:model="kredit" name="kredit" class="rounded-md @error('kredit') is-invalid @enderror" placeholder="Masukkan Kredit">
+                                                <input type="number" wire:model="kredit" name="kredit" class="rounded-md @error('kredit') is-invalid @enderror" placeholder="Jumlah Keluar (Rp)">
                                                 @error('kredit')
                                                 {{$message}}
                                                 @enderror
@@ -167,7 +168,7 @@
                                     <td class="border border-slate-600 px-2">
                                         @if($update && $item->id == $updateId)
                                             @if($type == 'debet')
-                                                <input type="number" wire:model="debet" name="debet" class="rounded-md @error('debet') is-invalid @enderror" placeholder="Masukkan Debet">
+                                                <input type="number" wire:model="debet" name="debet" class="rounded-md @error('debet') is-invalid @enderror" placeholder="Jumlah Masuk (Rp)">
                                                 @error('debet')
                                                     {{$message}}
                                                 @enderror
@@ -181,7 +182,7 @@
                                     <td class="border border-slate-600 px-2">
                                         @if($update && $item->id == $updateId)
                                             @if($type == 'kredit')
-                                                <input type="number" wire:model="kredit" name="kredit" class="rounded-md @error('kredit') is-invalid @enderror" placeholder="Masukkan Kredit">
+                                                <input type="number" wire:model="kredit" name="kredit" class="rounded-md @error('kredit') is-invalid @enderror" placeholder="Jumlah Keluar (Rp)">
                                                 @error('kredit')
                                                 {{$message}}
                                                 @enderror
@@ -212,7 +213,7 @@
                                                 <a wire:click.prevent="cancelEdit({{$item->id}})"><i class="bi bi-x hover:text-red-500"></i></a>
                                             @else
                                                 <a wire:click.prevent="edit({{$item->id}})"><i class="bi bi-pen hover:text-amber-500"></i></a>
-                                                <a wire:click.prevent="delete({{$item->id}})"><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>
+                                                <a onclick="confirmLiveDelete({{$item->id}})"><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>
                                                 {{-- <a wire:click.prevent="displays({{$item->id}})"><i class="bi bi-display-fill {{$item->display == 'true' ? 'text-green-500 hover:text-black' : 'text-black hover:text-green-500'}}"></i></a> --}}
                                             @endif
                                         </div>
@@ -282,6 +283,7 @@
                         @endif
                         <div class="flex gap-2">
                             <select wire:model="month" wire:change="search" class="rounded-md">
+                                <option hidden selected>{{now()->format('m')}}</option>
                                 @foreach(range(1, 12) as $month)
                                     <option value="{{ $month }}">{{ $month }}</option>
                                 @endforeach
@@ -360,7 +362,7 @@
                                     <div class="flex items-center w-full px-4">
                                         @if($update && $item->id == $updateId)
                                             @if($type == 'debet')
-                                                <input type="number" wire:model="debet" name="debet" class="w-full rounded-md" placeholder="Masukkan Debet">
+                                                <input type="number" wire:model="debet" name="debet" class="w-full rounded-md" placeholder="Jumlah Masuk (Rp)">
                                                 @error('debet')
                                                     {{$message}}
                                                 @enderror
@@ -374,7 +376,7 @@
                                     <div class="flex items-center w-full px-4">
                                         @if($update && $item->id == $updateId)
                                             @if($type == 'kredit')
-                                                <input type="number" wire:model="kredit" name="kredit" class="w-full rounded-md" placeholder="Masukkan kredit">
+                                                <input type="number" wire:model="kredit" name="kredit" class="w-full rounded-md" placeholder="Jumlah Keluar (Rp)">
                                                 @error('kredit')
                                                     {{$message}}
                                                 @enderror
@@ -412,7 +414,7 @@
                                         <a wire:click.prevent="cancelEdit({{$item->id}})"><i class="bi bg-red-300 rounded-full px-2 py-1 bi-x hover:text-red-500"></i></a>
                                     @else
                                         <a wire:click.prevent="edit({{$item->id}})"><i class="bi bi-pen hover:text-amber-500"></i></a>
-                                        <a wire:click.prevent="delete({{$item->id}})"><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>
+                                        <a onclick="confirmLiveDelete({{$item->id}})"><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>
                                     @endif
                                 </div>
                         </div>
@@ -422,4 +424,18 @@
             </div>
         </div>
     </div>
+    <script>
+        confirmLiveDelete = function(item_id) {
+            swal({
+                'title': 'Konfirmasi Hapus',
+                'text': 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
+                'dangerMode': true,
+                'buttons': true
+            }).then(function(value) {
+                if (value) {
+                    @this.delete(item_id);
+                }
+            })
+        }
+    </script>
 </div>

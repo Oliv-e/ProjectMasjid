@@ -19,7 +19,7 @@
                     @else
                         @isset($data_petugas_jumat)
                         <a class="p-2 px-3 text-white rounded-lg bg-gray-800" wire:click.prevent="edit({{$data_petugas_jumat->id}})"><i class="bi bi-pen hover:text-amber-500"></i></a>
-                        <a class="p-2 px-3 text-white rounded-lg bg-gray-800" wire:click.prevent="bersihkan({{$data_petugas_jumat->id}})"><i class="bi bi-trash hover:text-red-500"></i></a>
+                        <a class="p-2 px-3 text-white rounded-lg bg-gray-800" onclick="confirmLiveDelete({{$data_petugas_jumat->id}})"><i class="bi bi-trash hover:text-red-500"></i></a>
                         @endisset
                     @endif
                 @endif
@@ -153,4 +153,18 @@
             </div>
         </div>
     </div>
+    <script>
+        confirmLiveDelete = function(item_id) {
+            swal({
+                'title': 'Konfirmasi Hapus',
+                'text': 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
+                'dangerMode': true,
+                'buttons': true
+            }).then(function(value) {
+                if (value) {
+                    @this.delete(item_id);
+                }
+            })
+        }
+    </script>
 </div>

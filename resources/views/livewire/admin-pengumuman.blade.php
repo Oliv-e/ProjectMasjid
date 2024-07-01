@@ -112,7 +112,7 @@
                                                 <a wire:click.prevent="cancelEdit({{$item->id}})"><i class="bi bi-x hover:text-red-500 hover:bg-red-200 bg-red-700 px-1 my-1 rounded-md text-white"></i></a>
                                             @else
                                                 <a wire:click.prevent="edit({{$item->id}})"><i class="bi bi-pen hover:text-amber-500"></i></a>
-                                                <a wire:click="delete({{$item->id}})"><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>
+                                                <a onclick="confirmLiveDelete({{$item->id}})"><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>
                                                 <a wire:click.prevent="displays({{$item->id}})"><i class="bi bi-display-fill {{$item->display == 'true' ? 'text-green-500 hover:text-black' : 'text-black hover:text-green-500'}}"></i></a>
                                             @endif
                                         </div>
@@ -152,33 +152,6 @@
                         </div>
                     @endif
                     <div class="w-full flex flex-col gap-2">
-                        @foreach ($pengumuman as $item)
-                        <div class="card w-full">
-                            <div class="bg-slate-200 rounded-md flex items-center gap-2 p-3">
-                                <p class="">{{$loop->iteration}}</p>
-                                <div class="min-h-10 flex items-center w-full mx-2">
-                                    @if($update && $item->id == $updateId)
-                                        <input type="text" wire:model="content" name="content" class="rounded-md w-full" placeholder="Masukkan Pengumuman">
-                                        @error('content')
-                                            {{$message}}
-                                        @enderror
-                                        @else
-                                        <span>{{$item->content}}</span>
-                                        @endif
-                                </div>
-                            </div>
-                            <div class="flex mt-3 items-center gap-x-4 text-2xl justify-end">
-                                    @if($update && $item->id == $updateId)
-                                        <a wire:click.prevent="updates({{$item->id}})"><i class="bi bi-floppy hover:text-green-500"></i></a>
-                                        <a wire:click.prevent="cancelEdit({{$item->id}})"><i class="bi bi-x hover:text-red-500"></i></a>
-                                    @else
-                                        <a wire:click.prevent="edit({{$item->id}})"><i class="bi bi-pen hover:text-amber-500"></i></a>
-                                        <a wire:click.prevent="delete({{$item->id}})"><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>
-                                        <a wire:click.prevent="displays({{$item->id}})"><i class="bi bi-display-fill {{$item->display == 'true' ? 'text-green-500 hover:text-black' : 'text-black hover:text-green-500'}}"></i></a>
-                                    @endif
-                                </div>
-                        </div>
-                        @endforeach
                         @if ($create == true)
                         <div class="card bg-slate-300 rounded-md">
                             <div class="flex flex-col gap-2 p-2 mt-1">
@@ -208,9 +181,50 @@
                             </div>
                         </div>
                         @endif
+                        @foreach ($pengumuman as $item)
+                        <div class="card w-full">
+                            <div class="bg-slate-200 rounded-md flex items-center gap-2 p-3">
+                                <p class="">{{$loop->iteration}}</p>
+                                <div class="min-h-10 flex items-center w-full mx-2">
+                                    @if($update && $item->id == $updateId)
+                                        <input type="text" wire:model="content" name="content" class="rounded-md w-full" placeholder="Masukkan Pengumuman">
+                                        @error('content')
+                                            {{$message}}
+                                        @enderror
+                                        @else
+                                        <span>{{$item->content}}</span>
+                                        @endif
+                                </div>
+                            </div>
+                            <div class="flex mt-3 items-center gap-x-4 text-2xl justify-end">
+                                    @if($update && $item->id == $updateId)
+                                        <a wire:click.prevent="updates({{$item->id}})"><i class="bi bi-floppy hover:text-green-500"></i></a>
+                                        <a wire:click.prevent="cancelEdit({{$item->id}})"><i class="bi bi-x hover:text-red-500"></i></a>
+                                    @else
+                                        <a wire:click.prevent="edit({{$item->id}})"><i class="bi bi-pen hover:text-amber-500"></i></a>
+                                        <a onclick="confirmLiveDelete({{$item->id}})"><i class="mx-4 bi bi-trash hover:text-red-500"></i></a>
+                                        <a wire:click.prevent="displays({{$item->id}})"><i class="bi bi-display-fill {{$item->display == 'true' ? 'text-green-500 hover:text-black' : 'text-black hover:text-green-500'}}"></i></a>
+                                    @endif
+                                </div>
+                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        confirmLiveDelete = function(item_id) {
+            swal({
+                'title': 'Konfirmasi Hapus',
+                'text': 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
+                'dangerMode': true,
+                'buttons': true
+            }).then(function(value) {
+                if (value) {
+                    @this.delete(item_id);
+                }
+            })
+        }
+    </script>
 </div>

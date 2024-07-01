@@ -129,7 +129,7 @@ class AdminPetugasJumat extends Component
             session()->flash('error','Something goes wrong!!');
         }
     }
-    public function bersihkan($id) {
+    public function delete($id) {
         $pjd = \App\Models\PetugasJumat::find($id);
         try {
             

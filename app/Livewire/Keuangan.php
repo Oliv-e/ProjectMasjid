@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Keuangan extends Component
 {
-    public $data_keuangan;
+    public $data_keuangan, $visible;
     public $data_saldo = [];
     #[On('keuangan_updated')]
     public function render()
@@ -24,6 +24,8 @@ class Keuangan extends Component
             $this->data_saldo[] = $saldo;
         }
         $this->data_saldo = array_reverse($this->data_saldo);
+        $data = \App\Models\Visible::first();
+        $this->visible = $data->visible;
         return view('livewire.keuangan');
     }
 }

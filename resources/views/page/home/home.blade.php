@@ -19,17 +19,12 @@
         </div>
     </div>
     <div class="d-flex justify-content-between px-4">
-        @if (\Carbon\Carbon::now()->isFriday())
-            <div class="w-25">
-                @livewire('petugas-jumat')
-            </div>
-        @endif
-        <?php $tampilkan = true ?>
-        @if ($tampilkan)
-            <div class="w-50">
-                @livewire('keuangan')
-            </div>
-        @endif
+        <div class="w-25">
+            @livewire('petugas-jumat')
+        </div>
+        <div class="w-50">
+            @livewire('keuangan')
+        </div>
         <div class="w-25">
             @livewire('jadwal')
         </div>

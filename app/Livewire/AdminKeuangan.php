@@ -9,7 +9,7 @@ use Livewire\Component;
 class AdminKeuangan extends Component
 {
     public $year, $month, $data_keuangan, $dibuat, $type, $debet, $kredit, $saldo, $keterangan, $updateId, $preview;
-    public $data_saldo;
+    public $data_saldo, $visible;
     public $create , $update = false;
     public function mount() {
         if (!$this->year) {
@@ -43,6 +43,9 @@ class AdminKeuangan extends Component
             $this->data_saldo[] = $this->saldo;
         }
         $this->data_saldo = array_reverse($this->data_saldo);
+
+        $data = \App\Models\Visible::first();
+        $this->visible = $data->visible;
     }
     protected $rules = [
         'type' => 'required',
@@ -50,6 +53,19 @@ class AdminKeuangan extends Component
         'kredit' => 'integer',
         'keterangan' => 'string'
     ];
+    public function disp() {
+        if ($this->visible == 'true') {
+            \App\Models\Visible::first()->update([
+                'visible' => 'false'
+            ]);
+        } else  {
+            \App\Models\Visible::first()->update([
+                'visible' => 'true'
+            ]);
+        }
+        $this->mount();
+        $this->dispatch('keuangan_updated');
+    }
     public function resetFields() {
         $this->type = '';
         $this->debet = '';

@@ -6,6 +6,7 @@
 @livewireStyles
 <link href="https://fonts.cdnfonts.com/css/calculator" rel="stylesheet">
 <link href="https://fonts.cdnfonts.com/css/digital-dismay" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
 <style>
     .ser {
         display: none

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gambar;
 use App\Models\Log_History;
 use App\Models\User;
+use App\Models\Visible;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,8 +15,7 @@ use Illuminate\Validation\Rule;
 class AdminController extends Controller
 {
     public function home() {
-        $gambar = Gambar::all();
-        return view('page.home.home', compact('gambar'));
+        return view('page.home.home');
     }
     public function index() {
         $gambar = Gambar::all();

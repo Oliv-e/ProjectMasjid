@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Gambar;
 use App\Models\Log_History;
 use App\Models\User;
-use App\Models\Visible;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
@@ -38,10 +36,6 @@ class AdminController extends Controller
         return view('admin.Gambar.edit', compact('gambar'));
     }
     public function store(Request $request, String $id) {
-        // $past = Gambar::findOrFail($id);
-        // if($past->gambar) {
-        //     dd(Storage::delete($past->gambar)); ////-> true
-        // }
         if($request->gambar) {
             $gambar = $request->file('gambar');
             $hash = $gambar->hashName();

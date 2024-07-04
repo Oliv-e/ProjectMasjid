@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Carbon\carbon;
@@ -34,7 +35,7 @@ class AdminPetugasJumat extends Component
         $this->mount();
     }
     public function creates() {
-        $created = Carbon::now()->isFriday() ? Carbon::now() : Carbon::now()->next(Carbon::FRIDAY);
+        $created = Carbon::now()->isFriday() ? Carbon::now() : Carbon::now()->next(CarbonInterface::FRIDAY);
         $check_data = \App\Models\PetugasJumat::whereDate('created_at', $created)->first();
         
         if (!$check_data) {

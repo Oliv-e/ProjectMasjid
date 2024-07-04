@@ -1,9 +1,9 @@
 <div wire:poll class="fs-2">
-    @if (\Carbon\Carbon::now()->isFriday())
+    
         <div class="border border-white rounded-4 text-center text-white" style="background-color: rgba(0, 0, 0, 0.7)">
             <div class="d-flex flex-column pt-2">
-                <span class="fs-3">Petugas Jumat Hari ini</span>
-                <span class="fs-3">{{now()->format('d-m-Y')}}</span>
+                <span class="fs-3">Petugas Jumat</span>
+                <span class="fs-3">{{(\Carbon\Carbon::now()->isFriday() ? \Carbon\Carbon::now() : \Carbon\Carbon::now()->next(\Carbon\Carbon::FRIDAY))->format('d-m-Y')}}</span>
             </div>
             <hr class="border-2 border-white">
             <div class="d-flex flex-column overflow-hidden">
@@ -23,5 +23,4 @@
                 <span class="fs-3 text-black text-uppercase" style="background-color: orange">{{$data_petugas_jumat->bilal}}</span>
             </div>
         </div>
-    @endif
 </div>

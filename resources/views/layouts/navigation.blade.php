@@ -29,12 +29,14 @@
                     <x-nav-link :href="route('gambar')" :active="request()->routeIs(['gambar','gambar.edit'])">
                         {{ __('Latar Belakang') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('history')" :active="request()->routeIs('history')">
-                        {{ __('Aktivitas') }}
-                    </x-nav-link>
                     @if (Auth::check() && (Auth::user()->role == 'admin') || (Auth::user()->role == 'super_admin'))
                     <x-nav-link :href="route('manage_user')" :active="request()->routeIs('manage_user')">
                         {{ __('Manajemen Akun') }}
+                    </x-nav-link>
+                    @endif
+                    @if (Auth::check() && (Auth::user()->role == 'super_admin'))
+                    <x-nav-link :href="route('history')" :active="request()->routeIs('history')">
+                        {{ __('Aktivitas') }}
                     </x-nav-link>
                     @endif
                 </div>
@@ -56,9 +58,6 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('history')">
-                                {{ __('Aktivitas Saya') }}
-                        </x-dropdown-link>
                         @if (Auth::check() && (Auth::user()->role == 'admin') || (Auth::user()->role == 'super_admin'))
                             <x-dropdown-link :href="route('manage_user')">
                                 {{ __('Manajemen Akun') }}
@@ -108,13 +107,15 @@
             <x-responsive-nav-link :href="route('gambar')" :active="request()->routeIs(['gambar','gambar.edit'])">
                 {{ __('Latar Belakang') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('history')" :active="request()->routeIs('history')">
-                {{ __('Aktivitas Saya') }}
-            </x-responsive-nav-link>
             @if (Auth::check() && (Auth::user()->role == 'admin') || (Auth::user()->role == 'super_admin'))
                 <x-responsive-nav-link :href="route('manage_user')" :active="request()->routeIs('manage_user')">
                     {{ __('Manajemen Akun') }}
                 </x-responsive-nav-link>
+            @endif
+            @if (Auth::check() && (Auth::user()->role == 'super_admin'))
+            <x-responsive-nav-link :href="route('history')" :active="request()->routeIs('history')">
+                {{ __('Aktivitas Saya') }}
+            </x-responsive-nav-link>
             @endif
         </div>
 
@@ -126,9 +127,6 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('history')">
-                    {{ __('Aktivitas Saya') }}
-                </x-responsive-nav-link>
                 @if (Auth::check() && (Auth::user()->role == 'admin') || (Auth::user()->role == 'super_admin'))
                     <x-responsive-nav-link :href="route('manage_user')">
                         {{ __('Manajemen Akun') }}

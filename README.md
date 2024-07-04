@@ -37,6 +37,8 @@ Revisi
 -- Filter Data
 -- Paginasi Data
 -- History Pengurus Jumat
+- 04 July 24
+-- Tetap Tampil Petugas Jumat, Tanggal Jumat Terdekat.
 --------------------------------------------------------
 Bugs
 --------------------------------------------------------

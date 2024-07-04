@@ -22,7 +22,7 @@
                                 @endif
                             </td>
                             <td class="fs-5 text-center align-middle">Rp. {{number_format($data_saldo[$index],0,',','.')}}</td>
-                            <td class="fs-3 text-center">{{$item->keterangan}}</td>
+                            <td class="fs-5 align-middle text-center">{{$item->keterangan}}</td>
                         </tr>
                     @endforeach
                 </tbody>

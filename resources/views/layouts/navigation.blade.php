@@ -7,9 +7,9 @@
                 <div class="shrink-0 flex items-center gap-2">
                     <a  href="{{ route('dashboard') }}">
                         <img src="{{ asset('gambar/logo.svg')}}" class="img-fluid" alt="">
-                        
+
                     </a>
-                    <h1 class="font-bold ">Masjid Al-ikhlas</h1>
+                    <h1 class="font-bold ">{{ env('APP_NAME') }}</h1>
                 </div>
 
                 <!-- Navigation Links -->
@@ -61,6 +61,9 @@
                         @if (Auth::check() && (Auth::user()->role == 'admin') || (Auth::user()->role == 'super_admin'))
                             <x-dropdown-link :href="route('manage_user')">
                                 {{ __('Manajemen Akun') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('settings')">
+                                {{ __('Pengaturan') }}
                             </x-dropdown-link>
                         @endif
                         <!-- Authentication -->

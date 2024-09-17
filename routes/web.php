@@ -32,5 +32,18 @@ Route::middleware(['is_admin_super_admin'])->group(function () {
     Route::get('/dashboard/manage-user/edit/{id}', [AdminController::class, 'edit_user'])->name('manage_user.edit');
     Route::POST('/dashboard/manage-user/edit/{id}', [AdminController::class, 'update_user'])->name('manage_user.update');
     Route::get('/dashboard/manage-user/hapus/{id}', [AdminController::class, 'delete_user'])->name('manage_user.delete');
+    Route::get('/dashboard/settings', [AdminController::class, 'settings'])->name('settings');
+    Route::POST('/dashboard/settings', [AdminController::class, 'settings_change_name'])->name('settings.change_name');
 });
+
+Route::get('/createstrg1', function () {
+    Artisan::call('storage:link');
+});
+Route::get('/createstrg2', function () {
+    $target = '/home/public_html/storage/app/public';
+    $shortcut = '/home/public_html/public/storage';
+    symlink($target, $shortcut);
+});
+
+
 require __DIR__.'/auth.php';

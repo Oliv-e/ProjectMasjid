@@ -10,7 +10,7 @@
         </div>
     </div>
 {{-- Tab & Desktop --}}
-    <div class="hidden md:block py-4 flex flex-col w-full gap-2">
+    <div class="hidden md:flex py-4 flex-col w-full gap-2">
         <div class="max-w-7xl w-full mx-auto sm:px-6 md:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -21,7 +21,7 @@
                                 <span>{{$preview->content}}</span>
                             @else
                                 <span>Tidak ada Pengumuman Terbaru!</span>
-                            @endisset   
+                            @endisset
                         </div>
                     </div>
                     @if(session()->has('success'))
@@ -127,7 +127,7 @@
         </div>
     </div>
 {{-- responsive --}}
-    <div class="block md:hidden py-4 flex flex-col w-full gap-2">
+    <div class="md:hidden py-4 flex flex-col w-full gap-2">
         <div class="max-w-7xl w-[90%] mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden rounded-md shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -138,7 +138,7 @@
                                 <span>{{$preview->content}}</span>
                             @else
                                 <span>Tidak ada Pengumuman Terbaru!</span>
-                            @endisset   
+                            @endisset
                         </div>
                     </div>
                     @if(session()->has('success'))

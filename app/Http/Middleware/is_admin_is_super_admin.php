@@ -17,7 +17,7 @@ class is_admin_is_super_admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && (Auth::user()->role == 'super_admin')) {
+        if (Auth::check() && (Auth::user()->role == 'admin' || Auth::user()->role == 'super_admin')) {
             return $next($request);
         }
         return redirect(RouteServiceProvider::HOME);

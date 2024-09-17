@@ -46,7 +46,7 @@ class AdminController extends Controller
             $gambar = $request->file('gambar');
             $hash = $gambar->hashName();
             $gambar->storeAs('public',$hash);
-    
+
             Gambar::whereId($id)->update([
                 'gambar' => $hash,
                 'display' => $request->display,
@@ -72,13 +72,13 @@ class AdminController extends Controller
         //     dd(Storage::delete($past->gambar)); ////-> true
         // }
         $gambar = Gambar::findOrFail($id);
-        
+
         if($gambar->display == 'true') {
             $display = 'false';
         } else {
             $display = 'true';
         }
-        
+
         Gambar::whereId($id)->update([
             'display' => $display,
         ]);
@@ -161,7 +161,7 @@ class AdminController extends Controller
         if ($request->password) {
             $data->update([
                 'password' => Hash::make($request->password)
-            ]); 
+            ]);
         }
         if ($request->email != $data->email) {
             $data->update([
@@ -184,5 +184,28 @@ class AdminController extends Controller
     }
     public function recovery() {
         return view('admin.Recovery.home');
+    }
+
+    // settings
+
+    public function settings() {
+        return view('admin.Settings.home');
+    }
+    public function settings_change_name(Request $request) {
+        $text = '"' . $request->input('nama_masjid') . '"';
+        $this->updateEnvFile('APP_NAME', $text);
+        return redirect()->back()->with('success', 'Nama Berhasil diganti');
+    }
+    private function updateEnvFile($key, $value)
+    {
+        $envFile = app()->environmentFilePath();
+        $content = file($envFile);
+        foreach ($content as $lineNumber => $line) {
+            if (strpos($line, $key) !== false) {
+                $content[$lineNumber] = $key . '=' . $value . "\n";
+                break;
+            }
+        }
+        file_put_contents($envFile, implode('', $content));
     }
 }

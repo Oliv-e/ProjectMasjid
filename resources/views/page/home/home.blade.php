@@ -5,9 +5,9 @@
         @livewire('gambar')
     </div>
     <div class="d-flex p-4 justify-content-between">
-        <div class="w-25 d-flex fs-1 align-items-center gap-2 rounded-4 border-white border" style="background-color: rgba(0,0,0,0.7)">
-            <img src="{{ asset('gambar/logo.svg')}}" class="img-fluid p-2" width="100px" alt="Masjid Icon">
-            <span class="fs-2 text-white">Masjid Nurul Huda</span>
+        <div class="d-flex fs-1 align-items-center px-4 gap-2 rounded-4 border-white border" style="width: 74%!important; background-color: rgba(0,0,0,0.7)">
+            <img src="{{ asset('gambar/logo.svg')}}" class="img-fluid p-2 " width="100px" alt="Masjid Icon">
+            <span class="fs-2 text-white">{{ env('APP_NAME') }}</span>
         </div>
         <div class="w-25 text-white border-white border rounded-4" style="background-color: rgba(0,0,0,0.7)">
             <div class="fs-1 text-center">
@@ -33,7 +33,7 @@
         <div class="w-75 p-4">
             @livewire('pengumuman')
         </div>
-        <div class="w-25 p-4">
+        <div class="w-25 pt-4 pe-4">
             <div class="border border-white rounded-4 w-full text-white p-4 text-center" style="background-color: rgba(0, 0, 0, 0.7)">
                 <span>{{now()->format('d-m-Y')}}</span>
             </div>
@@ -48,7 +48,7 @@
 
         setInterval(() => {
             let currentTime = new Date();
-            
+
             hrs.innerHTML = String(currentTime.getHours()).padStart(2, '0');
             min.innerHTML = String(currentTime.getMinutes()).padStart(2, '0');
             sec.innerHTML = String(currentTime.getSeconds()).padStart(2, '0');

@@ -9,7 +9,7 @@
             <a wire:click="new()">Data Baru <i class="ms-2 bi bi-plus rounded-lg bg-slate-900 hover:bg-slate-600 text-white px-4 py-2 mr-2"></i></a>
         </div>
     </div>
-    <div class="pb-4 flex flex-row justify-between w-[50%] gap-2">
+    <div class="pb-4 flex flex-row justify-between w-7xl mx-auto gap-2">
         <div class="md:flex max-w-7xl w-full hidden gap-2 mx-auto sm:px-6 lg:px-8">
             <select wire:model="month" wire:change="search" class="rounded-md">
                 <option hidden selected>{{now()->format('m')}}</option>
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="flex flex-col w-full gap-2">
         <div class="max-w-8xl w-full mx-auto sm:px-6 lg:px-8">
             <div class="hidden lg:block bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -117,7 +117,7 @@
                                     <td class="border border-slate-600"><span class="p-4">{{$loop->iteration}}</span></td>
                                     <td class="border border-slate-600 px-2">
                                         @if($update && $item->id == $updateId)
-                                        <input type="datetime-local" wire:model="dibuat" name="dibuat" class="rounded-md @error('dibuat') is-invalid @enderror">
+                                        <input type="datetime-local" wire:model="dibuat" value="{{$dibuat}}" name="dibuat" class="rounded-md @error('dibuat') is-invalid @enderror">
                                         @error('dibuat')
                                         {{$message}}
                                         @enderror
@@ -233,7 +233,7 @@
         </div>
     </div>
 
-    <div class="block lg:hidden py-4 flex flex-col w-full gap-2">
+    <div class="lg:hidden py-4 flex flex-col w-full gap-2">
         <div class="max-w-7xl w-[90%] mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden rounded-md shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">

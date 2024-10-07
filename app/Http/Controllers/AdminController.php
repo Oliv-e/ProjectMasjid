@@ -15,7 +15,7 @@ use Illuminate\Validation\Rule;
 class AdminController extends Controller
 {
     public function home() {
-        return view('page.home.home');
+        return view('page.home.revisi');
     }
     public function index() {
         $gambar = Gambar::all();

@@ -9,7 +9,7 @@ use Carbon\carbon;
 class AdminPetugasJumat extends Component
 {
     public $khotib, $tanggal, $imam, $muadzin, $bilal, $data_petugas_jumat, $display, $data_tanggal, $create = false, $update = false, $updateId, $history;
-    public $created_at;
+    public $created_at, $tipe_petugas;
     protected $rules = [
         'khotib' => 'required',
         'imam' => 'required',
@@ -36,7 +36,7 @@ class AdminPetugasJumat extends Component
     public function creates() {
         $created = Carbon::now()->isFriday() ? Carbon::now() : Carbon::now()->next(Carbon::FRIDAY);
         $check_data = \App\Models\PetugasJumat::whereDate('created_at', $created)->first();
-        
+
         if (!$check_data) {
             $this->resetFields();
             $this->create = true;
@@ -132,7 +132,7 @@ class AdminPetugasJumat extends Component
     public function delete($id) {
         $pjd = \App\Models\PetugasJumat::find($id);
         try {
-            
+
             \App\Models\Log_History::create([
                 'bagian' => 'Petugas Jumat ID '. $pjd->id,
                 'aktivitas' => 'Menghapus',
@@ -149,6 +149,10 @@ class AdminPetugasJumat extends Component
         } catch (\Exception $ex) {
             session()->flash('error','Something goes wrong!!');
         }
+    }
+
+    public function ganti_petugas() {
+        return $this->tipe_petugas;
     }
     public function render() {
         return view('livewire.admin-petugas-jumat');

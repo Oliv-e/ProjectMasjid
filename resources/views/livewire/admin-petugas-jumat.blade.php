@@ -15,7 +15,7 @@
                     <button class="p-2 px-3 text-white rounded-lg bg-gray-800" wire:click.prevent="cancelEdit({{$data_petugas_jumat->id}})"><i class="bi bi-x hover:text-red-500"></i></button>
                 @else
                     @if ($create)
-                        
+
                     @else
                         @isset($data_petugas_jumat)
                         <a class="p-2 px-3 text-white rounded-lg bg-gray-800" wire:click.prevent="edit({{$data_petugas_jumat->id}})"><i class="bi bi-pen hover:text-amber-500"></i></a>
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="py-4 flex flex-col w-full gap-2">
         <div class="max-w-7xl w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -42,6 +42,11 @@
                         </div>
                     @endif
                     <div>
+                        <select wire:model="tipe_petugas">
+                            <option value="jumat">Petugas Jumat</option>
+                            <option value="jumat">Petugas Eid</option>
+                            <option value="jumat">Petugas Taraweh</option>
+                        </select>
                         @if ($create || $update)
                             @if ($create)
                                 <span class="text-center">Tambah Petugas untuk Jumat Depan</span>

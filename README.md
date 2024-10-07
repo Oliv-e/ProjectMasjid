@@ -39,6 +39,11 @@ Revisi
 -- History Pengurus Jumat
 - 04 July 24
 -- Tetap Tampil Petugas Jumat, Tanggal Jumat Terdekat.
+- 05 Oct 24
+-- Bilal dihapus dari petugas jumat
+-- Buat 3 tipe pengurus yaitu petugas jumat, petugas taraweh, sholat eid
+-- Alarm pada saat adzan
+-- Fix Bug petugas jumat [Done]
 --------------------------------------------------------
 Bugs
 --------------------------------------------------------

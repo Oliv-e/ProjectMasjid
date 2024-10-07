@@ -13,7 +13,7 @@
                 <tbody>
                     @foreach ($data_keuangan as $index => $item)
                         <tr class="@if($item->debet) table-success @else table-danger @endif">
-                            <td class="fs-3 text-center">{{($item->created_at)->format('d-m-Y')}}</td>
+                            <td class="fs-5 text-center">{{($item->created_at)->format('d-m-Y')}}</td>
                             <td class="fs-5 text-center align-middle">
                                 @if($item->debet)
                                     Rp. {{number_format($item->debet,0,',','.')}}

@@ -1,5 +1,5 @@
 <div x-data="next({{ $next_waktu * 1000 }}, '{{ $next_nama }}')" x-init="sCD()">
-    <h1 class="fs-5 text-center"> 
+    <h1 class="fs-5 text-center">
         <span x-text="next_nama"></span> dalam
         <span x-text="jam"></span> Jam
         <span x-text="menit"></span> Menit
